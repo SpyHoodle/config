@@ -50,6 +50,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.users.${username}.imports = [ 
+              ./homes/common/java.nix
               ./homes/common/ssh
               ./homes/common/amfora.nix
               ./homes/common/btop.nix
@@ -161,6 +162,7 @@
             home-manager.users.${username}.imports = [
               ./homes/laptop/home.nix
               ./homes/laptop/ssh.nix
+              ./homes/laptop/shell.nix
               ./homes/common/ssh
               ./homes/common/amfora.nix
               ./homes/common/btop.nix
