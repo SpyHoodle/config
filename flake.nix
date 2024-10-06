@@ -71,6 +71,7 @@
               ./homes/common/wezterm.nix
               ./homes/common/xdg.nix
               ./homes/common/zsh.nix             
+              ./homes/common/radicle.nix
 
               ./homes/desktop/alacritty.nix
               ./homes/desktop/anyrun.nix
@@ -183,6 +184,7 @@
               ./homes/common/wezterm.nix
               ./homes/common/xdg.nix
               ./homes/common/zsh.nix             
+              ./homes/common/radicle.nix
             ];
           }
           # Nix Darwin Modules
