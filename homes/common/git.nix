@@ -14,6 +14,7 @@
     };
 
     aliases = {
+      pushall = "!git remote | xargs -L1 git push --all";
       graph = "log --graph --oneline --decorate";
       unstage = "reset HEAD --";
       co = "checkout";
