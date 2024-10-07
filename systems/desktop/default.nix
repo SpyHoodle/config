@@ -1,0 +1,35 @@
+{
+  imports = [
+    ./audio.nix
+    ./avahi.nix
+    ./bluetooth.nix
+    ./boot.nix
+    ./clicks-tailscale.nix
+    ./cpu.nix
+    ./doas.nix
+    ./firewall.nix
+    ./fonts.nix
+    ./gpg.nix
+    ./hardware.nix
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./locale.nix
+    ./ly.nix
+    ./man.nix
+    ./networking.nix
+    ./nix-ld.nix
+    ./nix.nix
+    ./nixos.nix
+    ./nvidia.nix
+    ./packages.nix
+    ./security.nix
+    ./ssh.nix
+    ./systemd.nix
+    ./tailscale.nix
+    ./users.nix
+    ./xdg.nix
+    ./xorg.nix
+    ./yubikey.nix
+    ./zsh.nix
+  ];
+}

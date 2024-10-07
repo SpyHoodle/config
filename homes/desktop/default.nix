@@ -1,0 +1,35 @@
+{
+  import = [
+    ./alacritty.nix
+    ./anyrun.nix
+    ./audio.nix
+    ./chromium.nix
+    ./cider.nix
+    ./cursor.nix
+    ./discord.nix
+    ./element.nix
+    ./games.nix
+    ./gtk.nix
+    ./home.nix
+    ./hyprland.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
+    ./kdeconnect.nix
+    ./kitty.nix
+    ./librewolf.nix
+    ./minecraft.nix
+    ./mpv.nix
+    ./ncdu.nix
+    ./steam.nix
+    ./syncplay.nix
+    ./terminals.nix
+    ./tor-browser.nix
+    ./uxplay.nix
+    ./waybar.nix
+    ./wine.nix
+    ./wlogout.nix
+    ./xdg.nix
+    ./xorg.nix
+    ./zathura.nix
+  ];
+}
