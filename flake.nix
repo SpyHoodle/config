@@ -80,7 +80,6 @@
               ./homes/desktop/cider.nix
               ./homes/desktop/cursor.nix
               ./homes/desktop/discord.nix
-              ./homes/desktop/dmenu.nix
               ./homes/desktop/element.nix
               ./homes/desktop/games.nix
               ./homes/desktop/gtk.nix
