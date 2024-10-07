@@ -1,9 +1,8 @@
-
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   nix = {
-    package = pkgs.nixVersions.latest;
+    package = lib.mkForce inputs.lix-module.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;

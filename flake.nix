@@ -24,6 +24,10 @@
     # Woomer
     woomer.url = "github:coffeeispower/woomer";
     woomer.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Lix Module
+    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=refs/tags/2.91.0";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... } @ inputs:
@@ -67,6 +71,7 @@
 
           # NixOS Modules
           ./systems/desktop
+          inputs.lix-module.nixosModules.default
         ];
       };
 
@@ -75,6 +80,7 @@
         system = "aarch64-darwin";
         specialArgs = {
           inherit username;
+          inherit inputs;
         };
         modules = [
           # Home Manager Modules
@@ -83,6 +89,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
               inherit username;
+              inherit inputs;
               pkgs = nixpkgs_aarch64_darwin;
             };
             home-manager.users.${username}.imports = [
@@ -93,6 +100,7 @@
 
           # Nix Darwin Modules
           ./systems/laptop
+          inputs.lix-module.nixosModules.default
         ];
       };
 
