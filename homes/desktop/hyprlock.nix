@@ -11,7 +11,7 @@
 
       background = [
         {
-          path = "/home/maddie/Code/NixFiles/homes/desktop/hyprpaper/nasa-img-09-13.png";
+          path = "/home/maddie/Code/config/homes/desktop/hyprpaper/nasa-img-09-13.png";
           blur_passes = 3;
           blur_size = 8;
         }
