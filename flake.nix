@@ -1,5 +1,5 @@
 {
-  description = "SpyHoodle Nix Configuration";
+  description = "SpyHoodle's personal nix system configurations";
 
   inputs = {
     # Nixpkgs Unstable
