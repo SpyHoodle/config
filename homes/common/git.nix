@@ -10,7 +10,7 @@
     signing = {
       key = "FA50688B9EB6D8AA070C8241C296DE8C9053683F";
       signByDefault = true;
-      gpgPath = "/run/current-system/sw/bin/gpg";
+      gpgPath = "${pkgs.gnupg}/bin/gpg";
     };
 
     aliases = {
@@ -26,7 +26,7 @@
     extraConfig = {
       init.defaultBranch = "development";
       pull.rebase = "merges";
-      core.sshCommand = "/run/current-system/sw/bin/ssh";
+      core.sshCommand = "${pkgs.openssh}/bin/ssh";
     };
 
     ignores = [
