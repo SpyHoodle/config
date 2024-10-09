@@ -13,7 +13,5 @@
     fzf
     bat
     git
-
-    jdk17
   ];
 }
