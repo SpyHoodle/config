@@ -21,7 +21,6 @@
     ./xdg.nix
     ./zsh.nix             
     ./radicle.nix
-    ./insect.nix
     ./neovim.nix
   ];
 }

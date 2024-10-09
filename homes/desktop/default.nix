@@ -31,5 +31,6 @@
     ./xdg.nix
     ./xorg.nix
     ./zathura.nix
+    ./insect.nix
   ];
 }
