@@ -1,5 +1,5 @@
 {
-  import = [
+  imports = [
     ./alacritty.nix
     ./anyrun.nix
     ./audio.nix
