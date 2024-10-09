@@ -28,6 +28,10 @@
     # Lix Module
     lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=refs/tags/2.91.0";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Neovim configuration
+    editor.url = "github:spyhoodle/editor";
+    editor.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... } @ inputs:
