@@ -10,6 +10,7 @@
       _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=${config.xdg.configHome}/java";
     };
 
+
     shellAliases = {
       wget = "wget --hsts-file='${config.xdg.dataHome}/wget-hsts'";
     };

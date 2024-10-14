@@ -5,6 +5,11 @@
     xdg-utils
     xdg-user-dirs
   ];
+  
+  home.sessionVariables = {
+    BROWSER = "librewolf";
+    TERMINAL = "alacritty";
+  };
 
   xdg = {
     enable = true;
@@ -45,15 +50,6 @@
         "text/plain" = "text.desktop";
         "text/html" = "browser.desktop";
       };
-    };
-  };
-
-  home = {
-    sessionVariables = {
-      # Default programs
-      EDITOR = "nvim";
-      TERMINAL = "st";
-      BROWSER = "librewolf";
     };
   };
 }
