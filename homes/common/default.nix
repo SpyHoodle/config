@@ -22,5 +22,6 @@
     ./zsh.nix             
     ./radicle.nix
     ./neovim.nix
+    ./fzf.nix
   ];
 }
