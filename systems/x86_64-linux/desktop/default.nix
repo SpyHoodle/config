@@ -108,11 +108,14 @@
       tools.enable = true;
       shell.zsh.enable = true;
       ollama.enable = true;
+      steam.enable = true;
+      coolercontrol.enable = true;
     };
 
     # Services
     services = {
       openrgb.enable = true;
+      openrazer.enable = true;
       gnupg.enable = true;
     };
 
