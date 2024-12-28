@@ -9,6 +9,10 @@
           "DP-1, 2560x1440@200, 2560x0, 1"
           "DP-2, 2560x1440@200, 0x0, 1"
         ];
+        startupApps = [
+          "discordcanary"
+          "openrgb --device 'Razer Huntsman' --mode static --color FFFFFF --brightness 100"
+        ];
       };
 
       # Waybar
