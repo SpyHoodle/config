@@ -28,7 +28,7 @@
           default = 8;
         };
       };
-      startupApplications = lib.mkOption {
+      startupApps = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         description = "List of commands to run on hyprland start";
         default = [ ];
@@ -110,7 +110,7 @@
             "${pkgs.waybar}/bin/waybar"
             "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
             "${pkgs.clipse}/bin/clipse -listen"
-          ];
+          ] ++ config.host.desktop.hyprland.startupApps;
 
           input = {
             kb_layout = "gb";
