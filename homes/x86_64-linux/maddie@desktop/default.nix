@@ -97,6 +97,9 @@
       # Hyfetch
       hyfetch.enable = true;
 
+      # VSCode
+      vscode.enable = true;
+
       # Discord
       discord.enable = true;
 
