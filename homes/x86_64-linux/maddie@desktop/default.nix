@@ -24,6 +24,12 @@
       hyprlock.enable = true;
     };
 
+    # Code
+    code = {
+      python.enable = true;
+      rust.enable = true;
+    };
+
     # Theme
     theme = {
       catppuccin.enable = true;

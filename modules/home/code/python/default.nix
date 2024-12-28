@@ -19,6 +19,6 @@
   };
 
   config = lib.mkIf config.host.code.python.enable {
-    home.packages = with pkgs; [ config.host.code.python.package ];
+    home.packages = [ config.host.code.python.package ];
   };
 }

@@ -7,13 +7,13 @@
 
 {
   options = {
-    home.code.rust.enable = lib.mkEnableOption {
+    host.code.rust.enable = lib.mkEnableOption {
       description = "Enable Rust programming language support";
       default = true;
     };
   };
 
-  config = lib.mkIf config.home.code.rust.enable {
+  config = lib.mkIf config.host.code.rust.enable {
     home.packages = with pkgs; [ rustup ];
 
     home = {
