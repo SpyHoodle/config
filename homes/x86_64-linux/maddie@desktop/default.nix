@@ -89,7 +89,11 @@
 
     # Games
     games = {
+      # Minecraft
       minecraft.enable = true;
+
+      # osu!
+      osu.enable = true;
     };
 
     # Programs
