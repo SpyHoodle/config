@@ -56,7 +56,7 @@
       snowfall = {
         namespace = "host";
         meta.name = "Host";
-        meta.title = "Modules to create the neat environment";
+        meta.title = "My custom modules";
       };
 
       outputs-builder = channels: {
