@@ -17,7 +17,8 @@
   config = lib.mkIf config.host.programs.btop.enable {
     programs.btop = {
       enable = true;
-      package = pkgs.btop-rocm;
+      # https://github.com/NixOS/nixpkgs/issues/368672
+      # package = pkgs.btop-rocm;
       settings = {
         color_theme = "TTY";
         theme_background = false;

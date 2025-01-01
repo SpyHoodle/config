@@ -8,7 +8,8 @@
   config = lib.mkIf config.host.programs.ollama.enable {
     services.ollama = {
       enable = true;
-      acceleration = "rocm";
+      # https://github.com/NixOS/nixpkgs/issues/368672
+      # acceleration = "rocm";
     };
     services.nextjs-ollama-llm-ui = {
       enable = true;
