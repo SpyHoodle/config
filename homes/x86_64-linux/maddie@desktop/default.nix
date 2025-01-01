@@ -38,7 +38,7 @@
     theme = {
       catppuccin.enable = true;
       colors.accent = "base0E";
-      wallpaper = ./wallpapers/catppuccin.png;
+      wallpaper = ./wallpapers/nasa.png;
     };
 
     # Shell
