@@ -101,6 +101,7 @@
       tools.enable = true;
       shell.zsh.enable = true;
       ollama.enable = true;
+      steam.enable = true;
     };
 
     # Services
