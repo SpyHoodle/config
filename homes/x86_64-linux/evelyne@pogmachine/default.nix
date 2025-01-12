@@ -6,7 +6,8 @@
       hyprland = {
         enable = true;
         monitors = [
-          "HDMI-A-1, 1920x1080@75, 0x0, 1"
+          "DP-2, 2560x1440@1440, 0x0, 1"
+          "HDMI-A-1, 1920x1080@75, 2560x0, 1"
         ];
       };
 
@@ -78,7 +79,14 @@
 
     # Games
     games = {
+      # Minecraft
       minecraft.enable = true;
+
+      # Osu!
+      osu.enable = true;
+
+      # Tetrio
+      tetrio.enable = true;
     };
 
     # Programs

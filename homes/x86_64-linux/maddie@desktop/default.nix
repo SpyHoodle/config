@@ -94,6 +94,9 @@
 
       # osu!
       osu.enable = true;
+
+      # Tetrio
+      tetrio.enable = true;
     };
 
     # Programs
