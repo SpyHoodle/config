@@ -34,14 +34,7 @@
       enable = true;
       hostName = "pogmachine";
       useDHCP = true;
-      wireless = {
-        enable = true;
-        networks = {
-          "VM8171683" = {
-            psk = "kfrGpacagzzad3yg";
-          };
-        };
-      };
+      wireless.enable = false;
       firewall = {
         enable = true;
         allowedTCPPorts = [ ];
