@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   options = {
@@ -15,6 +15,7 @@
   config = lib.mkIf config.host.browser.chromium.enable {
     programs.chromium = {
       enable = true;
+      package = (pkgs.chromium.override { enableWideVine = true; });
       extensions = [
         # Dark Reader
         { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; }
