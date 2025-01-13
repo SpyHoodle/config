@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs Unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=master";
 
     # Snowfall Lib
     snowfall-lib.url = "github:snowfallorg/lib/dev";

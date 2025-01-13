@@ -6,7 +6,7 @@
   };
 
   config = lib.mkIf config.host.audio.pipewire.enable {
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
