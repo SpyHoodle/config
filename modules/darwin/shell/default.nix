@@ -13,8 +13,8 @@
   config = lib.mkIf config.host.programs.shell.zsh.enable {
     programs.zsh = {
       enable = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
+      enableSyntaxHighlighting = true;
+      enableCompletion = true;
     };
     environment.loginShell = pkgs.zsh;
   };
