@@ -2,12 +2,7 @@
 
 {
   options = {
-    host.desktop.mako.enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "Whether to use mako to handle notifications";
-      default = config.host.hyprland.enable;
-      example = false;
-    };
+    host.desktop.mako.enable = lib.mkEnableOption "Whether to use mako to handle notifications";
   };
 
   config = lib.mkIf config.host.desktop.mako.enable {
