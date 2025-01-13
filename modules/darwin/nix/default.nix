@@ -37,7 +37,6 @@
 
     nix.gc = lib.mkIf config.host.nix.garbageCollection.enable {
       automatic = true;
-      interval = "weekly";
       options = "--delete-older-than 30d";
     };
 

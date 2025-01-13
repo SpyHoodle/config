@@ -25,6 +25,7 @@
   host = {
     # Nix
     nix = {
+      lix.enable = true;
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;
