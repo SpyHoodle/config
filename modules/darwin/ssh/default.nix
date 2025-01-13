@@ -11,7 +11,7 @@
   };
 
   config = lib.mkIf config.host.programs.shell.zsh.enable {
-    environment.systemPacakges = with pkgs; [
+    environment.systemPackages = with pkgs; [
       openssh
     ];
   };
