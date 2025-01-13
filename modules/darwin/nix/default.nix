@@ -44,7 +44,5 @@
     };
 
     services.nix-daemon.enable = true;
-    nixpkgs.hostPlatform = system;
-    system.stateVersion = "25.05";
   };
 }
