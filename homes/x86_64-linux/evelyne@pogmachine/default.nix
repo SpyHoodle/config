@@ -137,7 +137,10 @@
       # Btop
       btop = {
         enable = true;
-        gpuName = "Radeon RX 7900XT";
+        gpu = {
+          enable = true;
+          name = "Radeon RX 7900XT";
+        };
       };
     };
   };
