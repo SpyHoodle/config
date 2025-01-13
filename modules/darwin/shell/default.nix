@@ -16,6 +16,7 @@
       enableSyntaxHighlighting = true;
       enableCompletion = true;
     };
+    environment.systemPath = [ "/opt/homebrew/bin" ];
   };
 }
 
