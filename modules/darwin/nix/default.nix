@@ -33,16 +33,15 @@
         "nix-command"
         "flakes"
       ];
-
-      auto-optimise-store = true;
     };
 
     nix.gc = lib.mkIf config.host.nix.garbageCollection.enable {
       automatic = true;
-      dates = "weekly";
+      interval = "weekly";
       options = "--delete-older-than 30d";
     };
 
     services.nix-daemon.enable = true;
+    system.stateVersion = 5;
   };
 }
