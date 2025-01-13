@@ -16,7 +16,6 @@
       enableSyntaxHighlighting = true;
       enableCompletion = true;
     };
-    environment.loginShell = pkgs.zsh;
   };
 }
 
