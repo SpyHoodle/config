@@ -36,6 +36,7 @@
 
     # Theme
     theme = {
+      enable = true;
       catppuccin.enable = true;
       colors.accent = "base0E";
       wallpaper = ./wallpapers/nasa.png;

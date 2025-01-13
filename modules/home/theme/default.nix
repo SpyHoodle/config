@@ -9,6 +9,7 @@
 
 {
   options.host.theme = {
+    enable = lib.mkEnableOption "Enable centralised managed theme";
     font = {
       mono = lib.mkOption {
         type = inputs.home-manager.lib.hm.types.fontType;
@@ -155,7 +156,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.host.theme.enable {
     fonts.fontconfig = {
       enable = true;
       defaultFonts = {

@@ -12,6 +12,7 @@
     #   colors.accent = "base0E";
     #   wallpaper = ./wallpapers/nasa.png;
     # };
+    theme.enable = false;
 
     # Shell
     shell = {
