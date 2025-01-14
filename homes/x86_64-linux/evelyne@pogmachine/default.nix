@@ -35,7 +35,10 @@
     # Shell
     shell = {
       zsh.enable = true;
-      starship.enable = true;
+      starship = {
+        enable = true;
+        icon = " ";
+      };
       aliases.enable = true;
     };
 
