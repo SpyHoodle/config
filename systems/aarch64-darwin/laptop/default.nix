@@ -39,6 +39,9 @@
       # OpenSSH
       ssh.enable = true;
 
+      # GPG
+      gpg.enable = true;
+
       # Touch ID for sudo
       sudo.touchId.enable = true;
 
