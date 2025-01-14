@@ -128,6 +128,9 @@
       # OBS Studio
       obs-studio.enable = true;
 
+      # Spotify
+      spotify.enable = true;
+
       # Cava
       cava.enable = true;
 
