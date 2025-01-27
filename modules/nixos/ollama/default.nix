@@ -8,7 +8,7 @@
   config = lib.mkIf config.host.programs.ollama.enable {
     services.ollama = {
       enable = true;
-      acceleration = "rocm";
+      #acceleration = "rocm";
     };
     services.nextjs-ollama-llm-ui = {
       enable = true;

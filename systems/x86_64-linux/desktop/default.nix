@@ -47,6 +47,7 @@
         allowedTCPPorts = [ ];
       };
       avahi.enable = false;
+      tailscale.enable = true;
     };
 
     # Bluetooth

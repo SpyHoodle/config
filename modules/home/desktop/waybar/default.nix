@@ -20,8 +20,8 @@
           position = "top";
           #margin = "12 12 0 12";
           margin = "0 0 0 0";
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "hyprland/window" ];
+          modules-left = [ "hyprland/workspaces" "hyprland/window" ];
+          modules-center = [ ];
           modules-right = [
             "tray"
             "privacy"
