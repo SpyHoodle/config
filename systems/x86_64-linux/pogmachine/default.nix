@@ -111,6 +111,9 @@
       gnupg.enable = true;
     };
 
+    # Kill nix-daemon if out of memory
+    systemd.nixOOMKiller.enable = true;
+
     # YubiKey Integration
     yubikey.enable = true;
   };
