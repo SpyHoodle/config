@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options = {
@@ -6,7 +6,10 @@
   };
 
   config = lib.mkIf config.host.audio.pipewire.enable {
-    services.pulseaudio.enable = false;
+    services.pulseaudio = {
+      enable = false;
+      package = pkgs.pulseaudioFull;
+    };
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
