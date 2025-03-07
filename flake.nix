@@ -17,10 +17,6 @@
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Hyprland
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
     # Any Run
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +36,9 @@
     # Apple Fonts
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Hyprland
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
   };
 
   outputs =
