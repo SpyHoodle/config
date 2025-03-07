@@ -30,7 +30,8 @@
             "cpu"
             "custom/mem"
             "disk"
-            "network"
+            "network#ethernet"
+            "network#tailscale"
             "clock"
           ];
           "hyprland/window" = {
@@ -71,17 +72,27 @@
           "hyprland/window" = {
             "max-length" = 50;
           };
-          "network" = {
-            "interface" = "wlp15s0";
+          "network#ethernet" = {
+            "interface" = "enp14s0";
             "format" = "{ifname}: Connecting";
-            "format-ethernet" = "  {ipaddr}";
-            "format-wifi" = "  {ipaddr}";
-            "format-disconnected" = "{ifname}: Disconnected";
-            "tooltip-format" = "{ifname} via {gwaddr} 󰊗";
-            "tooltip-format-wifi" = "{ssid} ({signalStrength}%)";
-            "tooltip-format-ethernet" = "{ifname} ";
-            "tooltip-format-disconnected" = "Disconnected";
+            "format-ethernet" = " ";
+            "format-wifi" = " ";
+            "format-disconnected" = " {ifname}";
+            "tooltip-format-ethernet" = "  {ifname}";
+            "tooltip-format-disconnected" = " Disconnected: {ifname}";
             "max-length" = 50;
+            "min-length" = 2;
+          };
+          "network#tailscale" = {
+            "interface" = "tailscale0";
+            "format" = "{ifname}: Connecting";
+            "format-ethernet" = " ";
+            "format-wifi" = " ";
+            "format-disconnected" = " ";
+            "tooltip-format-ethernet" = "  {ifname}";
+            "tooltip-format-disconnected" = "  Disconnected: {ifname}";
+            "max-length" = 50;
+            "min-length" = 2;
           };
           "clock" = {
             "interval" = 1;
