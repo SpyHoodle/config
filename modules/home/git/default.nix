@@ -32,7 +32,7 @@
       signing = {
         key = config.host.git.gpg.key;
         signByDefault = true;
-        gpgPath = "${pkgs.gnupg}/bin/gpg";
+        signer = "${pkgs.gnupg}/bin/gpg";
       };
 
       aliases = {
