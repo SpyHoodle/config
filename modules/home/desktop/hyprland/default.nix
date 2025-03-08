@@ -105,10 +105,10 @@
         in
         {
           exec-once = [
-            "sleep 0.5 && systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber mako kdeconnect"
+            "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber mako kdeconnect"
+            "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
             "${pkgs.hyprpaper}/bin/hyprpaper"
             "${pkgs.waybar}/bin/waybar"
-            "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
             "${pkgs.clipse}/bin/clipse -listen"
           ] ++ config.host.desktop.hyprland.startupApps;
 

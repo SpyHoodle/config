@@ -890,7 +890,7 @@
           package =
             pkgs.catppuccin-cursors."${lib.strings.toLower config.host.theme.catppuccin.style}${config.host.theme.style}";
           name = "catppuccin-${lib.strings.toLower config.host.theme.catppuccin.style}-${lib.strings.toLower config.host.theme.style}-cursors";
-          size = 32;
+          size = 24;
         };
       };
 
@@ -900,7 +900,7 @@
           package =
             pkgs.catppuccin-cursors."${lib.strings.toLower config.host.theme.catppuccin.style}${config.host.theme.style}";
           name = "catppuccin-${lib.strings.toLower config.host.theme.catppuccin.style}-${lib.strings.toLower config.host.theme.style}-cursors";
-          size = 24;
+          size = config.host.theme.cursor.size;
         };
       };
 
