@@ -6,7 +6,7 @@
       hyprland = {
         enable = true;
         monitors = [
-          "DP-2, 2560x1440@1440, 0x0, 1"
+          "DP-2, 2560x1440@144, 0x0, 1"
           "HDMI-A-1, 1920x1080@75, 2560x0, 1"
         ];
       };
@@ -21,7 +21,10 @@
       anyrun.enable = true;
 
       # Hyprlock
-      hyprlock.enable = true;
+      hyprlock = {
+        enable = true;
+        monitor = "DP-2";
+      };
     };
 
     # Theme
@@ -145,7 +148,7 @@
         enable = true;
         gpu = {
           enable = true;
-          name = "Radeon RX 7900XT";
+          name = "Radeon RX 6600XT";
         };
       };
     };

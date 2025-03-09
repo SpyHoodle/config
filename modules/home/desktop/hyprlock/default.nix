@@ -3,6 +3,11 @@
 {
   options = {
     host.desktop.hyprlock.enable = lib.mkEnableOption "Enable hyprlock, a hyprland screen locker";
+    host.desktop.hyprlock.monitor = lib.mkOption {
+      type = lib.types.str;
+      description = "Montior to display the password entry";
+      default = "DP-1";
+    };
   };
 
   config = lib.mkIf config.host.desktop.hyprlock.enable {
@@ -30,7 +35,7 @@
             size = "300, 70";
             rounding = -1;
             position = "0, 0";
-            monitor = "DP-1";
+            monitor = config.host.desktop.hyprlock.monitor;
             dots_center = true;
             fade_on_empty = false;
             font_color = "#${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex}";

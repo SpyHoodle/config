@@ -101,6 +101,7 @@
           zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
           screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
           clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
+          audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
           powermenu = "${pkgs.wlogout}/bin/wlogout";
         in
         {
@@ -152,9 +153,11 @@
             "opacity 0.7 0.7,initialTitle:^(Alacritty)$"
             "suppressevent maximize, class:.*"
             "float, class:(clipse)"
+            "float, class:(mixer)"
             "float, class:(xdg-desktop-portal-gtk)"
             "size 900 1000, class:(xdg-desktop-portal-gtk)"
             "size 622 652, class:(clipse)"
+            "size 622 652, class:(mixer)"
           ];
 
           layerrule = [
@@ -226,7 +229,8 @@
 
             # Function Keys
             ", F2, exec, ${clipboard_history}"
-            ", F11, exec, fullscreen, 1"
+            ", F8, exec, ${audio_mixer}"
+            ", F11, fullscreen, 0"
 
             # Move focus
             "${mod}, h, movefocus, l"
