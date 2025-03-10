@@ -100,13 +100,14 @@
           lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
           zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
           screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+          color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
           clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
           audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
           powermenu = "${pkgs.wlogout}/bin/wlogout";
         in
         {
           exec-once = [
-            "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber mako kdeconnect"
+            "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber hyprpolkitagent mako kdeconnect"
             "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
             "${pkgs.hyprpaper}/bin/hyprpaper"
             "${pkgs.waybar}/bin/waybar"
@@ -225,6 +226,8 @@
             "${mod}, B, exec, ${browser}"
             "${mod}, Z, exec, ${zoom}"
             "${mod}, X, exec, ${powermenu}"
+            "${mod}, C, exec, ${color_picker}"
+            "${mod}, V, exec, ${audio_mixer}"
             ", Insert, exec, ${lock}"
 
             # Function Keys
@@ -290,6 +293,7 @@
 
     home.packages = with pkgs; [
       wl-clipboard
+      hyprpolkitagent
     ];
   };
 }

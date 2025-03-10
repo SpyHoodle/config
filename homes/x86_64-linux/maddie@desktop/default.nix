@@ -13,6 +13,7 @@
           "discordcanary"
           "openrgb --device 'Razer Huntsman' --mode static --color FFFFFF --brightness 100"
         ];
+        hypridle.enable = true;
       };
 
       # Waybar
