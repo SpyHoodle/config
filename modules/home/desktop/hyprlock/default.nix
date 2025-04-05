@@ -5,7 +5,7 @@
     host.desktop.hyprlock.enable = lib.mkEnableOption "Enable hyprlock, a hyprland screen locker";
     host.desktop.hyprlock.monitor = lib.mkOption {
       type = lib.types.str;
-      description = "Montior to display the password entry";
+      description = "Monitor to display the password entry";
       default = "DP-1";
     };
   };
