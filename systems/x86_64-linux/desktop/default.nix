@@ -37,8 +37,8 @@
       wireless = {
         enable = true;
         networks = {
-          "BT-C5CPMR" = {
-            psk = "hN3LtFrkp36bXc";
+          "EE-756TPS" = {
+            psk = "VJHxLRJYE4wDPRtW";
           };
         };
       };

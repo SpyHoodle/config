@@ -73,7 +73,7 @@
             "max-length" = 50;
           };
           "network#ethernet" = {
-            "interface" = "enp14s0";
+            "interface" = "wlp15s0";
             "format" = "{ifname}: Connecting";
             "format-ethernet" = " ";
             "format-wifi" = " ";
