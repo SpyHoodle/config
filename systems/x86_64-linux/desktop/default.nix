@@ -116,7 +116,6 @@
     # Services
     services = {
       openrgb.enable = true;
-      openrazer.enable = true;
       gnupg.enable = true;
     };
 
