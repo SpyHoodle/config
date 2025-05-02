@@ -168,6 +168,14 @@
       # Chromium Web Apps
       chromium = {
         chatgpt.enable = true;
+        icloud.enable = true;
+        icloud-drive.enable = true;
+        icloud-notes.enable = true;
+        photopea.enable = true;
+        github-copilot.enable = true;
+        search-nixos.enable = true;
+        search-nixos-options.enable = true;
+        ollama.enable = true;
       };
     };
   };

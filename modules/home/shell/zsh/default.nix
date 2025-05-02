@@ -24,7 +24,7 @@
         path = "${config.xdg.cacheHome}/zsh/history";
       };
 
-      initExtra = ''
+      initContent = ''
         # Disable Ctrl-S to freeze terminal
         stty stop undef
 

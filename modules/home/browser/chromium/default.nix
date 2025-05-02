@@ -13,9 +13,13 @@
   };
 
   config = lib.mkIf config.host.browser.chromium.enable {
+    nixpkgs.config = {
+      chromium.enableWideVine = true;
+    };
+
     programs.chromium = {
       enable = true;
-      package = (pkgs.chromium.override { enableWideVine = true; });
+      package = pkgs.chromium.override { enableWideVine = true; };
       extensions = [
         # Dark Reader
         { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; }
@@ -25,12 +29,8 @@
         { id = "edibdbjcniadpccecjdfdjjppcpchdlm"; }
         # Reddit Enhancement Suite
         { id = "kbmfpngjjgdllneeigpgjifpgocmfgmb"; }
-        # Old Reddit Redirect
-        { id = "dneaehbmnbhcippjikoajpoabadpodje"; }
         # Return Youtube Dislike
         { id = "gebbhagfogifgggkldgodflihgfeippi"; }
-        # Vimium
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; }
       ];
     };
 

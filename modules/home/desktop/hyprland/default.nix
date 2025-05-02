@@ -98,7 +98,7 @@
             else
               "${pkgs.firefox}/bin/firefox";
           lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
-          zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
+          #zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
           screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
           color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
           clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
@@ -109,6 +109,7 @@
         {
           exec-once = [
             "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber hyprpolkitagent mako kdeconnect"
+            "sleep 5"
             "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
             "${pkgs.hyprpaper}/bin/hyprpaper"
             "${pkgs.waybar}/bin/waybar"
