@@ -10,8 +10,13 @@
           "DP-2, 2560x1440@200, 0x0, 1"
         ];
         startupApps = [
+          "sleep 2"
           "openrgb --device 'Razer Huntsman' --mode static --color FFFFFF --brightness 100"
           "discordcanary"
+          "obsidian"
+          "chromium"
+          "spotify"
+          "chromium --app=https://chatgpt.com"
         ];
         hypridle.enable = true;
       };
