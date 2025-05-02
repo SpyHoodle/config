@@ -103,6 +103,7 @@
           color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
           clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
           audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
+          chatgpt = "${pkgs.chromium}/bin/chromium --app=https://chatgpt.com";
           powermenu = "${pkgs.wlogout}/bin/wlogout";
         in
         {
@@ -121,15 +122,34 @@
 
           animations = {
             enabled = true;
-            bezier = "myBezier,  0.645, 0.045, 0.355, 1";
-
+            bezier = [
+              "linear, 0, 0, 1, 1"
+              "md3_standard, 0.2, 0, 0, 1"
+              "md3_decel, 0.05, 0.7, 0.1, 1"
+              "md3_accel, 0.3, 0, 0.8, 0.15"
+              "overshot, 0.05, 0.9, 0.1, 1.1"
+              "crazyshot, 0.1, 1.5, 0.76, 0.92"
+              "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
+              "menu_decel, 0.1, 1, 0, 1"
+              "menu_accel, 0.38, 0.04, 1, 0.07"
+              "easeInOutCirc, 0.85, 0, 0.15, 1"
+              "easeOutCirc, 0, 0.55, 0.45, 1"
+              "easeOutExpo, 0.16, 1, 0.3, 1"
+              "softAcDecel, 0.26, 0.26, 0.15, 1"
+              "md2, 0.4, 0, 0.2, 1"
+            ];
             animation = [
-              "windows, 1, 5, default, slide"
-              "windowsOut, 1, 5, default, slide"
-              "border, 1, 5, default"
-              "borderangle, 1, 5, default"
-              "fade, 1, 5, default"
-              "workspaces, 1, 5, myBezier"
+              "windows, 1, 4, overshot, popin 60%"
+              "windowsIn, 1, 4, overshot, popin 60%"
+              "windowsOut, 1, 4, overshot, popin 60%"
+              "border, 1, 10, default"
+              "fade, 1, 3, overshot"
+              "layersIn, 1, 3, menu_decel, slide"
+              "layersOut, 1, 1.6, menu_accel"
+              "fadeLayersIn, 1, 2, menu_decel"
+              "fadeLayersOut, 1, 0.5, menu_accel"
+              "workspaces, 1, 5, md3_decel, slide"
+              "specialWorkspace, 1, 3, md3_decel, slidevert"
             ];
           };
 
@@ -219,12 +239,13 @@
             "${mod}, RETURN, exec, ${terminal}"
 
             # Launcher
+            "ALT, SPACE, exec, ${chatgpt}"
             "${mod}, SPACE, exec, ${launcher}"
             "${mod}, D, exec, ${launcher}"
 
             # Programs
             "${mod}, B, exec, ${browser}"
-            "${mod}, Z, exec, ${zoom}"
+            #"${mod}, Z, exec, ${zoom}"
             "${mod}, X, exec, ${powermenu}"
             "${mod}, C, exec, ${color_picker}"
             "${mod}, V, exec, ${audio_mixer}"

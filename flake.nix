@@ -49,7 +49,7 @@
       src = ./.;
 
       homes.modules = [
-        inputs.anyrun.homeManagerModules.default
+        #inputs.anyrun.homeManagerModules.default
       ];
 
       systems.modules.nixos = [
