@@ -6,9 +6,19 @@
       hyprland = {
         enable = true;
         monitors = [
-          "DP-2, 2560x1440@144, 0x0, 1"
-          "HDMI-A-1, 1920x1080@75, 2560x0, 1"
+          "DP-1, 2560x1440@200, 2560x0, 1"
+          "DP-2, 2560x1440@200, 0x0, 1"
         ];
+        startupApps = [
+          "sleep 2"
+          "openrgb --device 'Razer Huntsman' --mode static --color FFFFFF --brightness 100"
+          "discordcanary"
+          "obsidian"
+          "chromium"
+          "spotify"
+          "chromium --app=https://chatgpt.com"
+        ];
+        hypridle.enable = true;
       };
 
       # Waybar
@@ -21,10 +31,29 @@
       anyrun.enable = true;
 
       # Hyprlock
-      hyprlock = {
-        enable = true;
-        monitor = "DP-2";
-      };
+      hyprlock.enable = true;
+    };
+
+    # Input
+    input.keyboard = {
+      layout = "gb";
+      variant = "mac";
+      appleMagic.enable = true;
+    };
+    input.trackpad = {
+      gestures.enable = true;
+      naturalScrolling = true;
+      tapToClick = false;
+    };
+    input.mouse = {
+      naturalScrolling = false;
+      sensitivity = 0.6;
+    };
+
+    # Code
+    code = {
+      python.enable = true;
+      rust.enable = true;
     };
 
     # Theme
@@ -32,16 +61,13 @@
       enable = true;
       catppuccin.enable = true;
       colors.accent = "base0E";
-      wallpaper = ./wallpapers/catppuccin.png;
+      wallpaper = ./wallpapers/nasa.png;
     };
 
     # Shell
     shell = {
       zsh.enable = true;
-      starship = {
-        enable = true;
-        icon = " ";
-      };
+      starship.enable = true;
       aliases.enable = true;
     };
 
@@ -54,9 +80,9 @@
     # Git
     git = {
       enable = true;
-      userName = "Eveleyne Cassidy";
-      userEmail = "retroevelyne@outlook.com";
-      gpg.key = "C4F179337DB0D43A2ABE8EC900FC03E8D01EA976";
+      userName = "Madeleine Holbrook";
+      userEmail = "maddie@spyhoodle.me";
+      gpg.key = "FA50688B9EB6D8AA070C8241C296DE8C9053683F";
     };
 
     # XDG
@@ -65,8 +91,8 @@
     # Home Manager
     home-manager = {
       enable = true;
-      username = "evelyne";
-      homeDir = "/home/evelyne/";
+      username = "maddie";
+      homeDir = "/home/maddie/";
     };
 
     # Terminal
@@ -89,7 +115,7 @@
       # Minecraft
       minecraft.enable = true;
 
-      # Osu!
+      # osu!
       osu.enable = true;
 
       # Tetrio
@@ -100,6 +126,9 @@
     programs = {
       # Hyfetch
       hyfetch.enable = true;
+
+      # VSCode
+      vscode.enable = true;
 
       # Discord
       discord.enable = true;
@@ -148,8 +177,21 @@
         enable = true;
         gpu = {
           enable = true;
-          name = "Radeon RX 6600XT";
+          name = "Radeon RX 7900XT";
         };
+      };
+
+      # Chromium Web Apps
+      chromium = {
+        chatgpt.enable = true;
+        icloud.enable = true;
+        icloud-drive.enable = true;
+        icloud-notes.enable = true;
+        photopea.enable = true;
+        github-copilot.enable = true;
+        search-nixos.enable = true;
+        search-nixos-options.enable = true;
+        ollama.enable = true;
       };
     };
   };

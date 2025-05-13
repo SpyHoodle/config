@@ -32,7 +32,7 @@
     # Networking
     networking = {
       enable = true;
-      hostName = "desktop";
+      hostName = "saturn";
       useDHCP = true;
       wireless = {
         enable = true;

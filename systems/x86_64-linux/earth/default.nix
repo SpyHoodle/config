@@ -32,7 +32,7 @@
     # Networking
     networking = {
       enable = true;
-      hostName = "pogmachine";
+      hostName = "earth";
       useDHCP = true;
       wireless.enable = false;
       firewall = {
