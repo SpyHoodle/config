@@ -117,8 +117,24 @@
           ] ++ config.host.desktop.hyprland.startupApps;
 
           input = {
-            kb_layout = "gb";
-            sensitivity = 0.6;
+            kb_layout = config.host.input.keyboard.layout;
+            kb_variant =
+              lib.mkIf (config.host.input.keyboard.variant != null)
+                config.host.input.keyboard.variant;
+            kb_options = lib.mkIf (config.host.input.keyboard.appleMagic.enable) "apple:alupckeys";
+            natural_scroll = config.host.input.mouse.scrolling.natural;
+            sensitivity = config.host.input.mouse.sensitivity;
+            numlock_by_default = true;
+            touchpad = {
+              natural_scroll = config.host.input.trackpad.scrolling.natural;
+              scroll_factor = config.host.input.trackpad.scrolling.factor;
+              tap-to-click = config.host.input.trackpad.tapToClick;
+              clickfinger_behavior = true;
+            };
+          };
+
+          gestures = lib.mkIf config.host.input.trackpad.gestures.enable {
+            workspace_swipe = true;
           };
 
           animations = {
@@ -312,6 +328,22 @@
           ];
         };
     };
+
+
+    services.fusuma.settings.swipe = lib.mkIf config.host.input.touchpad.enable (
+      let
+        hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
+        jq = "${pkgs.jq}/bin/jq";
+        awk = "${pkgs.gawk}/bin/awk";
+      in
+      {
+        "3".up.command = "${hyprctl} dispatch fullscreen 0";
+        "3".down.command = "${hyprctl} dispatch fullscreen 0";
+        "4".down.command = lock;
+        "3".left.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1+1}')";
+        "3".right.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1-1}')";
+      }
+    );
 
     home.packages = with pkgs; [
       wl-clipboard

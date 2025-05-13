@@ -12,6 +12,8 @@
     host.nix.garbageCollection.enable = lib.mkEnableOption "Enable the recommended garbage collection settings";
   };
   config = {
+    nix.enable = true;
+
     nix.settings = {
       builders-use-substitutes = lib.mkIf config.host.nix.caches.enable true;
 
@@ -40,7 +42,6 @@
       options = "--delete-older-than 30d";
     };
 
-    services.nix-daemon.enable = true;
     system.stateVersion = 5;
   };
 }

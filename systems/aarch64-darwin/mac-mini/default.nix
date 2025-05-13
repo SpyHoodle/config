@@ -40,10 +40,10 @@
       ssh.enable = true;
 
       # GPG
-      gpg.enable = true;
+      gnupg.enable = true;
 
-      # Touch ID for sudo
-      sudo.touchId.enable = true;
+      # Touch & Watch ID for sudo
+      sudo.idAuth.enable = true;
 
       # Zsh
       shell.zsh.enable = true;

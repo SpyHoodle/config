@@ -34,6 +34,21 @@
       hyprlock.enable = true;
     };
 
+    input.keyboard = {
+      layout = "gb";
+      variant = "mac";
+      appleMagic.enable = true;
+    };
+    input.trackpad = {
+      gestures.enable = true;
+      naturalScrolling = true;
+      tapToClick = false;
+    };
+    input.mouse = {
+      naturalScrolling = false;
+      sensitivity = 0.6;
+    };
+
     # Code
     code = {
       python.enable = true;
@@ -164,7 +179,7 @@
           name = "Radeon RX 7900XT";
         };
       };
-      
+
       # Chromium Web Apps
       chromium = {
         chatgpt.enable = true;

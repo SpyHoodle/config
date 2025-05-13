@@ -7,7 +7,7 @@
 
 {
   options = {
-    host.programs.tools.enable = lib.mkEnableOption "Enable reccommended tools";
+    host.programs.tools.enable = lib.mkEnableOption "Enable recommended tools";
   };
   config = lib.mkIf config.host.programs.tools.enable {
     environment.systemPackages = with pkgs; [
