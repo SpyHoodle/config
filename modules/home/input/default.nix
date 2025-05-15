@@ -11,7 +11,7 @@
     host.input.trackpad.scrolling.factor = lib.mkOption {
       type = lib.types.float;
       description = "Scrolling factor";
-      default = 1;
+      default = 1.0;
     };
     host.input.trackpad.tapToClick = lib.mkOption {
       type = lib.types.bool;

@@ -68,30 +68,31 @@
       };
     };
   };
-  config =
-  let
-    mod = "SUPER";
-    terminal = if config.host.terminal.alacritty.enable then "${pkgs.alacritty}/bin/alacritty" else "";
-    launcher =
-      if config.host.desktop.anyrun.enable then
-        "${inputs.anyrun.packages.${system}.anyrun}/bin/anyrun"
-      else
-        "";
-    browser =
-      if config.host.browser.chromium.enable then
-        "${pkgs.chromium}/bin/chromium"
-      else
-        "${pkgs.firefox}/bin/firefox";
-    lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
-    #zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
-    screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
-    color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
-    clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
-    audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
-    chatgpt = "${pkgs.chromium}/bin/chromium --app=https://chatgpt.com";
-    powermenu = "${pkgs.wlogout}/bin/wlogout";
-  in 
-  lib.mkIf config.host.desktop.hyprland.enable {
+
+  config = 
+    let
+      mod = "SUPER";
+      terminal = if config.host.terminal.alacritty.enable then "${pkgs.alacritty}/bin/alacritty" else "";
+      launcher =
+        if config.host.desktop.anyrun.enable then
+          "${inputs.anyrun.packages.${system}.anyrun}/bin/anyrun"
+        else
+          "";
+      browser =
+        if config.host.browser.chromium.enable then
+          "${pkgs.chromium}/bin/chromium"
+        else
+          "${pkgs.firefox}/bin/firefox";
+      lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
+      #zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
+      screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+      color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
+      clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
+      audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
+      chatgpt = "${pkgs.chromium}/bin/chromium --app=https://chatgpt.com";
+      powermenu = "${pkgs.wlogout}/bin/wlogout";
+    in
+    lib.mkIf config.host.desktop.hyprland.enable {
     programs.zsh.profileExtra = lib.mkBefore ''
       if [ -z $WAYLAND_DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
         exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${pkgs.dbus}/bin/dbus-run-session ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
@@ -329,8 +330,7 @@
         };
     };
 
-
-    services.fusuma.settings.swipe = lib.mkIf config.host.input.touchpad.enable (
+    services.fusuma.settings.swipe = lib.mkIf config.host.input.trackpad.gestures.enable (
       let
         hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
         jq = "${pkgs.jq}/bin/jq";

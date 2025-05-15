@@ -42,11 +42,11 @@
     };
     input.trackpad = {
       gestures.enable = true;
-      naturalScrolling = true;
+      scrolling.natural = true;
       tapToClick = false;
     };
     input.mouse = {
-      naturalScrolling = false;
+      scrolling.natural = false;
       sensitivity = 0.6;
     };
 
