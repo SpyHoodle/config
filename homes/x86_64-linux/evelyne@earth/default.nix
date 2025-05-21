@@ -63,7 +63,7 @@
     # Git
     git = {
       enable = true;
-      userName = "Eveleyne Cassidy";
+      userName = "Evelyne Cassidy";
       userEmail = "retroevelyne@outlook.com";
       gpg.key = "C4F179337DB0D43A2ABE8EC900FC03E8D01EA976";
     };
