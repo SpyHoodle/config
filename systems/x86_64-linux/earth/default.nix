@@ -51,7 +51,7 @@
       systemd.enable = true;
       sysrq.enable = true;
       linuxZen.enable = true;
-      kernelParams = [ "video=2560x1440@60" ];
+      kernelParams = [ "video=1080x1920@60" ];
     };
 
     # Desktop Environment
@@ -80,7 +80,6 @@
 
     # Nix
     nix = {
-      lix.enable = true;
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;

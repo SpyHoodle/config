@@ -6,8 +6,11 @@
       hyprland = {
         enable = true;
         monitors = [
-          "DP-2, 2560x1440@144, 0x0, 1"
-          "HDMI-A-1, 1920x1080@75, 2560x0, 1"
+          "HDMI-A-1, 1920x1080@75, 0x0, 1"
+        ];
+        startupApps = [
+          "sleep 2"
+          "discordcanary"
         ];
       };
 
@@ -26,17 +29,25 @@
       # Hyprlock
       hyprlock = {
         enable = true;
-        monitor = "DP-2";
+        monitor = "HDMI-A-1";
       };
     };
 
     # Input
     input.keyboard = {
       layout = "gb";
+      variant = "";
+      appleMagic.enable = false;
     };
     input.mouse = {
       scrolling.natural = false;
       sensitivity = 0.6;
+    };
+
+    # Code
+    code = {
+      python.enable = true;
+      rust.enable = true;
     };
 
     # Theme
@@ -162,6 +173,19 @@
           enable = true;
           name = "Radeon RX 6600XT";
         };
+      };
+
+      # Chromium Web Apps
+      chromium = {
+        chatgpt.enable = true;
+        icloud.enable = true;
+        icloud-drive.enable = true;
+        icloud-notes.enable = true;
+        photopea.enable = true;
+        github-copilot.enable = true;
+        search-nixos.enable = true;
+        search-nixos-options.enable = true;
+        ollama.enable = true;
       };
     };
   };

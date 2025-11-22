@@ -92,7 +92,6 @@
 
     # Nix
     nix = {
-      lix.enable = false;
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;
