@@ -27,26 +27,21 @@
       enable = true;
       lfs.enable = true;
 
-      userName = config.host.git.userName;
-      userEmail = config.host.git.userEmail;
-      signing = {
-        key = config.host.git.gpg.key;
-        signByDefault = true;
-        signer = "${pkgs.gnupg}/bin/gpg";
-      };
+      settings = {
+        user.name = config.host.git.userName;
+        user.email = config.host.git.userEmail;
 
-      aliases = {
-        pushall = "!git remote | xargs -L1 git push --all";
-        graph = "log --graph --oneline --decorate";
-        unstage = "reset HEAD --";
-        co = "checkout";
-        br = "branch";
-        ci = "commit";
-        st = "status";
-        ps = "push";
-      };
+        alias = {
+          pushall = "!git remote | xargs -L1 git push --all";
+          graph = "log --graph --oneline --decorate";
+          unstage = "reset HEAD --";
+          co = "checkout";
+          br = "branch";
+          ci = "commit";
+          st = "status";
+          ps = "push";
+        };
 
-      extraConfig = {
         init.defaultBranch = "development";
         pull.rebase = "merges";
         core.sshCommand = "${pkgs.openssh}/bin/ssh";
@@ -60,6 +55,12 @@
         "**/*.swp"
         "*.swp"
       ];
+
+      signing = {
+        key = config.host.git.gpg.key;
+        signByDefault = true;
+        signer = "${pkgs.gnupg}/bin/gpg";
+      };
     };
 
     home.packages = with pkgs; [ gh ];

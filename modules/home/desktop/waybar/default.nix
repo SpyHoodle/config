@@ -18,10 +18,9 @@
         mainBar = {
           layer = "top";
           position = "top";
-          #margin = "12 12 0 12";
           margin = "0 0 0 0";
-          modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-          modules-center = [ ];
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "hyprland/window" ];
           modules-right = [
             "tray"
             "privacy"
@@ -29,7 +28,6 @@
             "temperature"
             "cpu"
             "custom/mem"
-            "disk"
             "network#ethernet"
             "network#tailscale"
             "clock"

@@ -5,7 +5,7 @@
 
 window#waybar {
   background: transparent;
-  background-color: rgba(30, 33, 39, 0.6);
+  background-color: rgba(30, 33, 39, 0.8);
   color: @text;
   transition-property: background-color;
   transition-duration: .5s;
@@ -88,7 +88,7 @@ button:hover {
   margin-right: 10px;
   margin-left: 0px;
   border-radius: 10px;
-  padding: 0 10px;
+  padding: 3px 10px 3px;
   color: @text;
 }
 

@@ -69,7 +69,7 @@
     };
   };
 
-  config = 
+  config =
     let
       mod = "SUPER";
       terminal = if config.host.terminal.alacritty.enable then "${pkgs.alacritty}/bin/alacritty" else "";
@@ -84,7 +84,7 @@
         else
           "${pkgs.firefox}/bin/firefox";
       lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
-      #zoom = "${inputs.woomer.packages.${system}.default}/bin/woomer";
+      kill = "${pkgs.hyprland}/bin/hyprctl kill";
       screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
       color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
       clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
@@ -93,21 +93,20 @@
       powermenu = "${pkgs.wlogout}/bin/wlogout";
     in
     lib.mkIf config.host.desktop.hyprland.enable {
-    programs.zsh.profileExtra = lib.mkBefore ''
-      if [ -z $WAYLAND_DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${pkgs.dbus}/bin/dbus-run-session ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
-      fi
-    '';
+      programs.zsh.profileExtra = lib.mkBefore ''
+        if [ -z $WAYLAND_DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+          exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${pkgs.dbus}/bin/dbus-run-session ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
+        fi
+      '';
 
-    wayland.windowManager.hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${system}.hyprland;
+      wayland.windowManager.hyprland = {
+        enable = true;
+        package = inputs.hyprland.packages.${system}.hyprland;
 
-      xwayland.enable = true;
-      systemd.enable = true;
+        xwayland.enable = true;
+        systemd.enable = true;
 
-      settings =
-        {
+        settings = {
           exec-once = [
             "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber hyprpolkitagent mako kdeconnect"
             "sleep 5"
@@ -115,13 +114,14 @@
             "${pkgs.hyprpaper}/bin/hyprpaper"
             "${pkgs.waybar}/bin/waybar"
             "${pkgs.clipse}/bin/clipse -listen"
-          ] ++ config.host.desktop.hyprland.startupApps;
+          ]
+          ++ config.host.desktop.hyprland.startupApps;
 
           input = {
             kb_layout = config.host.input.keyboard.layout;
-            kb_variant =
-              lib.mkIf (config.host.input.keyboard.variant != null)
-                config.host.input.keyboard.variant;
+            kb_variant = lib.mkIf (
+              config.host.input.keyboard.variant != null
+            ) config.host.input.keyboard.variant;
             kb_options = lib.mkIf (config.host.input.keyboard.appleMagic.enable) "apple:alupckeys";
             natural_scroll = config.host.input.mouse.scrolling.natural;
             sensitivity = config.host.input.mouse.sensitivity;
@@ -134,9 +134,9 @@
             };
           };
 
-          gestures = lib.mkIf config.host.input.trackpad.gestures.enable {
-            workspace_swipe = true;
-          };
+          gesture = lib.mkIf config.host.input.trackpad.gestures.enable [
+            "3, horizontal, workspace"
+          ];
 
           animations = {
             enabled = true;
@@ -199,10 +199,6 @@
             "size 622 652, class:(mixer)"
           ];
 
-          layerrule = [
-            "blur,waybar"
-          ];
-
           decoration = {
             rounding = config.host.desktop.hyprland.window.rounding;
             shadow = {
@@ -263,8 +259,8 @@
 
             # Programs
             "${mod}, B, exec, ${browser}"
-            #"${mod}, Z, exec, ${zoom}"
-            "${mod}, X, exec, ${powermenu}"
+            "${mod}, Z, exec, ${powermenu}"
+            "${mod}, X, exec, ${kill}"
             "${mod}, C, exec, ${color_picker}"
             "${mod}, V, exec, ${audio_mixer}"
             ", Insert, exec, ${lock}"
@@ -328,26 +324,28 @@
             "${mod}, mouse:273, resizewindow"
           ];
         };
+      };
+
+      services.fusuma.settings.swipe = lib.mkIf config.host.input.trackpad.gestures.enable (
+        let
+          hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
+          jq = "${pkgs.jq}/bin/jq";
+          awk = "${pkgs.gawk}/bin/awk";
+        in
+        {
+          "3".up.command = "${hyprctl} dispatch fullscreen 0";
+          "3".down.command = "${hyprctl} dispatch fullscreen 0";
+          "4".down.command = lock;
+          "3".left.command =
+            "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1+1}')";
+          "3".right.command =
+            "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1-1}')";
+        }
+      );
+
+      home.packages = with pkgs; [
+        wl-clipboard
+        hyprpolkitagent
+      ];
     };
-
-    services.fusuma.settings.swipe = lib.mkIf config.host.input.trackpad.gestures.enable (
-      let
-        hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
-        jq = "${pkgs.jq}/bin/jq";
-        awk = "${pkgs.gawk}/bin/awk";
-      in
-      {
-        "3".up.command = "${hyprctl} dispatch fullscreen 0";
-        "3".down.command = "${hyprctl} dispatch fullscreen 0";
-        "4".down.command = lock;
-        "3".left.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1+1}')";
-        "3".right.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1-1}')";
-      }
-    );
-
-    home.packages = with pkgs; [
-      wl-clipboard
-      hyprpolkitagent
-    ];
-  };
 }

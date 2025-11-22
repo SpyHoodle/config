@@ -17,6 +17,7 @@
   config = lib.mkIf config.host.desktop.anyrun.enable {
     programs.anyrun = {
       enable = true;
+      package = inputs.anyrun.packages.${system}.anyrun;
 
       config = {
         plugins = with inputs.anyrun.packages.${system}; [
@@ -43,45 +44,100 @@
       };
 
       extraCss = ''
-        #window {
-          background-color: transparent;
+        @define-color accent #${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex};
+        @define-color bg-color #${config.host.theme.colors.pallete.base00.hex};
+        @define-color fg-color #${config.host.theme.colors.pallete.base05.hex};
+        @define-color desc-color #${config.host.theme.colors.pallete.base06.hex};
+
+        window {
+          background: transparent;
         }
-        #main * {
-          background-color: #${config.host.theme.colors.pallete.base00.hex};
-          color: #${config.host.theme.colors.pallete.base05.hex};
-          caret-color: alpha(#${
-            config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex
-          },0.6);
+
+        box.main {
+          padding: 5px;
+          margin: 10px;
+          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border: 2px solid @accent;
+          background-color: @bg-color;
+          box-shadow: 0 0 10px black;
+        }
+
+        text {
+          font-family: ${config.host.theme.font.sansSerif.name};
+          font-size: ${builtins.toString (config.host.theme.font.sansSerif.size + 1)}px;
+          padding: 3px;
+          min-height: 30px;
+          color: @fg-color;
+        }
+
+        .matches {
+          background-color: rgba(0, 0, 0, 0);
+          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+        }
+
+        box.plugin:first-child {
+          margin-top: 5px;
+        }
+
+        box.plugin.info {
+          min-width: 200px;
+        }
+
+        list.plugin {
+          background-color: rgba(0, 0, 0, 0);
+        }
+
+        label.match {
           font-family: ${config.host.theme.font.sansSerif.name};
           font-size: ${builtins.toString config.host.theme.font.sansSerif.size}px;
+          margin: 0;
+          padding: 0;
+          min-height: 15px;
+          color: @fg-color;
         }
-        #main {
-          border-width: 3px;
-          border-style: solid;
-          border-color: #${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex};
-          border-radius: 8px;
-        }
-        #main #main {
-          border-style: none;
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
-        }
-        #match-title, #match-desc {
+
+        label.match.description {
           font-family: ${config.host.theme.font.sansSerif.name};
+          font-size: ${builtins.toString (config.host.theme.font.sansSerif.size - 3)}px;
+          margin: 0;
+          padding: 0;
+          min-height: 10px;
+          color: @desc-color;
         }
-        #entry {
-          min-height: 36px;
-          padding: 10px;
-          font-size: 24px;
-          box-shadow: none;
-          border-style: none;
+
+        label.plugin.info {
+          font-family: ${config.host.theme.font.sansSerif.name};
+          font-size: ${builtins.toString config.host.theme.font.sansSerif.size}px;
+          margin: 0;
+          padding: 0;
+          min-height: 10px;
+          color: @fg-color;
         }
-        #entry:focus {
-          box-shadow: none;
+
+        .match {
+          font-family: ${config.host.theme.font.sansSerif.name};
+          font-size: ${builtins.toString config.host.theme.font.sansSerif.size}px;
+          background: transparent;
+          padding: 0;
+          border: 2px solid transparent;
+          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
         }
-        #entry selection {
-          background-color: alpha(#${config.host.theme.colors.pallete.base0A.hex},0.3);
-          color: transparent;
+
+        .match:selected {
+          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border: 2px solid @accent;
+          background: transparent;
+          animation: fade 0.3s linear;
+        }
+
+        @keyframes fade {
+          0% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
         }
       '';
     };

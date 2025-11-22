@@ -13,13 +13,12 @@
           "sleep 2"
           "openrgb --device 'Razer Huntsman' --mode static --color FFFFFF --brightness 100"
           "discordcanary"
-          "obsidian"
-          "chromium"
-          "spotify"
-          "chromium --app=https://chatgpt.com"
         ];
         hypridle.enable = true;
       };
+
+      # Wlogout
+      wlogout.enable = true;
 
       # Waybar
       waybar.enable = true;
@@ -37,8 +36,8 @@
     # Input
     input.keyboard = {
       layout = "gb";
-      variant = "mac";
-      appleMagic.enable = true;
+      variant = "";
+      appleMagic.enable = false;
     };
     input.trackpad = {
       gestures.enable = true;

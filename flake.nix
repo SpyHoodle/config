@@ -25,9 +25,9 @@
     woomer.url = "github:coffeeispower/woomer";
     woomer.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Lix Module
-    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module?ref=refs/tags/2.91.1-1";
-    lix-module.inputs.nixpkgs.follows = "nixpkgs";
+    # Astal
+    astal.url = "github:aylur/astal";
+    astal.inputs.nixpkgs.follows = "nixpkgs";
 
     # My NeoVim Configuration
     editor.url = "github:spyhoodle/editor";
@@ -49,11 +49,16 @@
       src = ./.;
 
       homes.modules = [
-        #inputs.anyrun.homeManagerModules.default
+        (
+          { modulesPath, ... }:
+          {
+            disabledModules = [ "${modulesPath}/programs/anyrun.nix" ];
+          }
+        )
+        inputs.anyrun.homeManagerModules.default
       ];
 
       systems.modules.nixos = [
-        inputs.lix-module.nixosModules.default
       ];
 
       snowfall = {

@@ -11,6 +11,6 @@
   };
 
   config = lib.mkIf config.host.programs.ncdu.enable {
-    home.packages = with pkgs; [ ncdu_2 ];
+    home.packages = with pkgs; [ ncdu ];
   };
 }

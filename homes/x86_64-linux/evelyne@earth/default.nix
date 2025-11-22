@@ -14,6 +14,9 @@
       # Waybar
       waybar.enable = true;
 
+      # Wlogout
+      wlogout.enable = true;
+
       # Mako
       mako.enable = true;
 
@@ -63,7 +66,7 @@
     # Git
     git = {
       enable = true;
-      userName = "Evelyne Cassidy";
+      userName = "Eveleyne Cassidy";
       userEmail = "retroevelyne@outlook.com";
       gpg.key = "C4F179337DB0D43A2ABE8EC900FC03E8D01EA976";
     };

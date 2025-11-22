@@ -16,7 +16,7 @@
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       autocd = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       history = {
         size = 9999999;
         expireDuplicatesFirst = true;

@@ -25,6 +25,8 @@
     ./hardware
   ];
 
+  services.logrotate.checkConfig = false;
+
   host = {
     # Audio
     audio.pipewire.enable = true;
@@ -47,7 +49,10 @@
         allowedTCPPorts = [ ];
       };
       avahi.enable = false;
-      tailscale.enable = true;
+      tailscale = { 
+        enable = true;
+        runExitNode = false;
+      };
     };
 
     # Bluetooth
@@ -87,7 +92,7 @@
 
     # Nix
     nix = {
-      lix.enable = true;
+      lix.enable = false;
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;

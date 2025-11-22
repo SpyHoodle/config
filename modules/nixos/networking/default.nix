@@ -46,6 +46,7 @@
   config = lib.mkIf config.host.networking.enable {
     networking.hostName = config.host.networking.hostName;
     networking.useDHCP = config.host.networking.useDHCP;
+    networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
     networking.wireless = lib.mkIf config.host.networking.wireless.enable {
       enable = true;
