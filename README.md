@@ -24,3 +24,4 @@ There's modules for theming, which allows the easy swap of wallpapers, fonts or 
 
 ### Themes
 - `theme.catppuccin.enable` - The default theme
+- `theme.onedark.enable` - OneDark theme ("Dark" and "Darker")
