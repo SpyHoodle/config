@@ -59,11 +59,8 @@
     theme = {
       enable = true;
       catppuccin.enable = false;
-      onedark = {
-        enable = true;
-        style = "Darker";
-      };
-      colors.accent = "base0E";
+      onedark.enable = true;
+      colors.accent = "base0D";
       wallpaper = ./wallpapers/nasa.png;
     };
 
