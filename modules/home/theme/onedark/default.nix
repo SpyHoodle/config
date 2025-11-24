@@ -25,6 +25,7 @@
     let
       onedarkColors = {
         Dark = {
+          # Background
           base00 = {
             hex = "21252b";
             rgb = {
@@ -90,6 +91,7 @@
               l = 56;
             };
           };
+          # Text
           base05 = {
             hex = "abb2bf";
             rgb = {
@@ -129,8 +131,9 @@
               l = 67;
             };
           };
+          # Red
           base08 = {
-            hex = "e86671";
+            hex = "e06C75";
             rgb = {
               r = 232;
               g = 102;
@@ -142,6 +145,7 @@
               l = 65;
             };
           };
+          # Orange
           base09 = {
             hex = "d19a66";
             rgb = {
@@ -155,6 +159,7 @@
               l = 61;
             };
           };
+          # Yellow
           base0A = {
             hex = "e5c07b";
             rgb = {
@@ -168,6 +173,7 @@
               l = 69;
             };
           };
+          # Green
           base0B = {
             hex = "98c379";
             rgb = {
@@ -181,6 +187,7 @@
               l = 62;
             };
           };
+          # Cyan
           base0C = {
             hex = "56b6c2";
             rgb = {
@@ -194,6 +201,7 @@
               l = 55;
             };
           };
+          # Blue
           base0D = {
             hex = "61afef";
             rgb = {
@@ -207,6 +215,7 @@
               l = 66;
             };
           };
+          # Magenta
           base0E = {
             hex = "c678dd";
             rgb = {

@@ -128,7 +128,7 @@ label:focus {
 }
 
 #network {
-  background-color: @cyan;
+  background-color: @magenta;
   color: black;
 }
 
@@ -169,7 +169,7 @@ label:focus {
 }
 
 #temperature {
-  background-color: @blue;
+  background-color: @cyan;
   color: black;
 }
 

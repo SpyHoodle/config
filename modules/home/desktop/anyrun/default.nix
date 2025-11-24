@@ -47,7 +47,7 @@
         @define-color accent #${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex};
         @define-color bg-color #${config.host.theme.colors.pallete.base00.hex};
         @define-color fg-color #${config.host.theme.colors.pallete.base05.hex};
-        @define-color desc-color #${config.host.theme.colors.pallete.base06.hex};
+        @define-color desc-color #${config.host.theme.colors.pallete.base04.hex};
 
         window {
           background: transparent;

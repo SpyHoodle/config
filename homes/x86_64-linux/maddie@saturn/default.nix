@@ -139,6 +139,9 @@
       # Obsidian
       obsidian.enable = true;
 
+      # Remmina
+      remmina.enable = true;
+
       # Eza
       eza.enable = true;
 
