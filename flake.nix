@@ -38,7 +38,7 @@
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hyprland
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/hyprland/v0.52.1-b";
   };
 
   outputs =
