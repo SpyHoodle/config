@@ -51,7 +51,6 @@
       systemd.enable = true;
       sysrq.enable = true;
       linuxZen.enable = true;
-      kernelParams = [ "video=1080x1920@60" ];
     };
 
     # Desktop Environment
