@@ -119,6 +119,7 @@
 
     # Services
     services = {
+      opentabletdriver.enable = true;
       openrgb.enable = true;
       gnupg.enable = true;
     };
