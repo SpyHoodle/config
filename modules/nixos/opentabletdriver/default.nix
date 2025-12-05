@@ -13,7 +13,6 @@
     hardware.opentabletdriver.daemon.enable = true;
     environment.systemPackages = with pkgs; [
       opentabletdriver
-      opentabletdriver-qt
     ];
   };
 }
