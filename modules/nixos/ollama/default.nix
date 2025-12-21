@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options = {
@@ -8,7 +13,7 @@
   config = lib.mkIf config.host.programs.ollama.enable {
     services.ollama = {
       enable = true;
-      acceleration = "rocm";
+      package = pkgs.ollama-rocm;
     };
     services.nextjs-ollama-llm-ui = {
       enable = true;
