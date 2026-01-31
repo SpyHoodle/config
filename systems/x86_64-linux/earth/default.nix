@@ -83,6 +83,7 @@
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;
+      nh.enable = true;
     };
 
     # Main User

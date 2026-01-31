@@ -95,6 +95,7 @@
       caches.enable = true;
       experimentalFeatures.enable = true;
       garbageCollection.enable = true;
+      nh.enable = true;
     };
 
     # Main User
@@ -114,6 +115,7 @@
       shell.zsh.enable = true;
       ollama.enable = true;
       steam.enable = true;
+      gamemode.enable = true;
       coolercontrol.enable = true;
     };
 
