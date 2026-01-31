@@ -31,6 +31,7 @@ in
       settings = {
         exec-once = [
           "${pkgs.waybar}/bin/waybar"
+          "${pkgs.hyprpaper}/bin/hyprpaper"
           "${pkgs.clipse}/bin/clipse -listen"
           "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
         ]
