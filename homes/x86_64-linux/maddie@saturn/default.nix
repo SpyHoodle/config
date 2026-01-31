@@ -126,6 +126,9 @@
 
     # Programs
     programs = {
+      # Gemini
+      gemini.enable = true;
+
       # Hyfetch
       hyfetch.enable = true;
 
