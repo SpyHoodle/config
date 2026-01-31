@@ -50,7 +50,7 @@
 
     networking.wireless = lib.mkIf config.host.networking.wireless.enable {
       enable = true;
-      userControlled.enable = true;
+      userControlled = true;
       networks = config.host.networking.wireless.networks;
     };
 
