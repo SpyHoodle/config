@@ -47,7 +47,7 @@
           size = 14;
         };
       };
-      nerdFontGlyglyphs.enable = lib.mkEnableOption "Enable Nerd Font Glyphs";
+      nerdFontGlyphs.enable = lib.mkEnableOption "Enable Nerd Font Glyphs";
       extraFonts = lib.mkOption {
         type = lib.types.listOf inputs.home-manager.lib.hm.types.fontType;
         description = "Extra fonts to install";
@@ -164,15 +164,14 @@
       };
     };
 
-    home.packages =
-      [
-        config.host.theme.font.mono.package
-        config.host.theme.font.serif.package
-        config.host.theme.font.sansSerif.package
-        config.host.theme.font.emoji.package
-      ]
-      ++ (if config.host.theme.font.nerdFontGlyphs.enable then [ pkgs.nerd-fonts.symbols-only ] else [ ])
-      ++ config.host.theme.font.extraFonts;
+    home.packages = [
+      config.host.theme.font.mono.package
+      config.host.theme.font.serif.package
+      config.host.theme.font.sansSerif.package
+      config.host.theme.font.emoji.package
+    ]
+    ++ (if config.host.theme.font.nerdFontGlyphs.enable then [ pkgs.nerd-fonts.symbols-only ] else [ ])
+    ++ config.host.theme.font.extraFonts;
 
     home.pointerCursor = lib.mkIf (config.host.theme.cursor != null) {
       name = config.host.theme.cursor.name;
