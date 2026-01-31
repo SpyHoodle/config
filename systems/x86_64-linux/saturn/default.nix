@@ -72,7 +72,7 @@
       hyprland.enable = true;
 
       # Ly Display Manager
-      ly.enable = true;
+      ly.enable = false;
     };
 
     # Doas
