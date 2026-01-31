@@ -93,35 +93,84 @@
       let
         wallpaper = config.host.theme.wallpaper;
         style = lib.strings.toLower config.host.theme.style;
+
+        # Define the template within the derivation
+        gtkTemplate = pkgs.writeText "gtk.css" ''
+          @define-color accent_color {{colors.primary.default.hex}};
+          @define-color accent_bg_color {{colors.primary.default.hex}};
+          @define-color accent_fg_color {{colors.on_primary.default.hex}};
+          @define-color destructive_color {{colors.error.default.hex}};
+          @define-color destructive_bg_color {{colors.error.default.hex}};
+          @define-color destructive_fg_color {{colors.on_error.default.hex}};
+          @define-color success_color {{colors.secondary.default.hex}};
+          @define-color success_bg_color {{colors.secondary.default.hex}};
+          @define-color success_fg_color {{colors.on_secondary.default.hex}};
+          @define-color warning_color {{colors.tertiary.default.hex}};
+          @define-color warning_bg_color {{colors.tertiary.default.hex}};
+          @define-color warning_fg_color {{colors.on_tertiary.default.hex}};
+          @define-color error_color {{colors.error.default.hex}};
+          @define-color error_bg_color {{colors.error.default.hex}};
+          @define-color error_fg_color {{colors.on_error.default.hex}};
+          @define-color window_bg_color {{colors.surface.default.hex}};
+          @define-color window_fg_color {{colors.on_surface.default.hex}};
+          @define-color view_bg_color {{colors.surface.default.hex}};
+          @define-color view_fg_color {{colors.on_surface.default.hex}};
+          @define-color headerbar_bg_color {{colors.surface.default.hex}};
+          @define-color headerbar_fg_color {{colors.on_surface.default.hex}};
+          @define-color headerbar_border_color {{colors.outline.default.hex}};
+          @define-color headerbar_backdrop_color @window_bg_color;
+          @define-color headerbar_shade_color rgba(0, 0, 0, 0.07);
+          @define-color card_bg_color {{colors.surface_container_low.default.hex}};
+          @define-color card_fg_color {{colors.on_surface.default.hex}};
+          @define-color card_shade_color rgba(0, 0, 0, 0.07);
+          @define-color popover_bg_color {{colors.surface_container.default.hex}};
+          @define-color popover_fg_color {{colors.on_surface.default.hex}};
+          @define-color shade_color rgba(0, 0, 0, 0.07);
+          @define-color scrollbar_outline_color {{colors.outline.default.hex}};
+        '';
         
         # Derivation to generate GTK theme
         gtkTheme = pkgs.runCommand "matugen-gtk-theme" {
             nativeBuildInputs = [ pkgs.matugen ];
             inherit wallpaper;
+            inherit gtkTemplate;
           } ''
-            mkdir -p $out/share/themes/Matugen-${style}
-            export HOME=$(pwd)
+            mkdir -p $out/share/themes/Matugen-${style}/gtk-4.0
+            mkdir -p $out/share/themes/Matugen-${style}/gtk-3.0
             
-            # Create dummy config directories
-            mkdir -p $HOME/.config/gtk-4.0
-            mkdir -p $HOME/.config/gtk-3.0
+            # Create matugen config
+            cat > matugen.toml <<EOF
+            [config]
+            reload_apps = false
+            set_wallpaper = false
             
-            # Run matugen to generate GTK3 and GTK4 themes
-            # We assume 'adw-gtk3' and 'adw-gtk4' or similar templates exist or fallback to default
-            # Using -t gtk3 -t gtk4 to attempt generation
+            [templates.gtk4]
+            input_path = "$gtkTemplate"
+            output_path = "$out/share/themes/Matugen-${style}/gtk-4.0/gtk.css"
+
+            [templates.gtk3]
+            input_path = "$gtkTemplate"
+            output_path = "$out/share/themes/Matugen-${style}/gtk-3.0/gtk.css"
+            EOF
             
-            matugen image "$wallpaper" -m ${style} -t adw-gtk3 -t adw-gtk4 || matugen image "$wallpaper" -m ${style} -t gtk3 -t gtk4
+            # Run matugen
+            matugen image "$wallpaper" -c matugen.toml -m ${style}
             
-            # Move generated files to output directory
-            if [ -d $HOME/.config/gtk-4.0 ]; then
-               mkdir -p $out/share/themes/Matugen-${style}/gtk-4.0
-               cp -r $HOME/.config/gtk-4.0/* $out/share/themes/Matugen-${style}/gtk-4.0/
-            fi
+            # Create index.theme for GTK3 support
+            cat > $out/share/themes/Matugen-${style}/index.theme <<EOF
+            [Desktop Entry]
+            Type=X-GNOME-Metatheme
+            Name=Matugen-${style}
+            Comment=Matugen generated theme
+            Encoding=UTF-8
             
-            if [ -d $HOME/.config/gtk-3.0 ]; then
-               mkdir -p $out/share/themes/Matugen-${style}/gtk-3.0
-               cp -r $HOME/.config/gtk-3.0/* $out/share/themes/Matugen-${style}/gtk-3.0/
-            fi
+            [X-GNOME-Metatheme]
+            GtkTheme=Matugen-${style}
+            MetacityTheme=adw-gtk3
+            IconTheme=Adwaita
+            CursorTheme=Adwaita
+            ButtonLayout=close,minimize,maximize:menu
+            EOF
           '';
       in
       {
