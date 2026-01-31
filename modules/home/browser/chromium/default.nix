@@ -7,9 +7,7 @@
   };
 
   config = lib.mkIf config.host.browser.chromium.enable {
-    nixpkgs.config = {
-      chromium.enableWideVine = true;
-    };
+
 
     programs.chromium = {
       enable = true;
