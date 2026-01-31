@@ -31,7 +31,6 @@ in
           "sleep 5"
           "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
           "${pkgs.hyprpaper}/bin/hyprpaper"
-          "${pkgs.waybar}/bin/waybar"
           "${pkgs.clipse}/bin/clipse -listen"
         ] ++ config.host.desktop.hyprland.startupApps;
 
