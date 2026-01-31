@@ -10,16 +10,8 @@
     host.nix.caches.enable = lib.mkEnableOption "Enable the recommended Nix caches and substituters";
     host.nix.experimentalFeatures.enable = lib.mkEnableOption "Enable the recommended experimental features in Nix";
     host.nix.garbageCollection.enable = lib.mkEnableOption "Enable the recommended garbage collection settings";
-    host.nix.nh.enable = lib.mkEnableOption "Enable the NH (Nix Helper) CLI tool";
   };
   config = {
-    programs.nh = lib.mkIf config.host.nix.nh.enable {
-      enable = true;
-      clean.enable = config.host.nix.garbageCollection.enable;
-      clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/home/${config.host.user.name}/Code/config";
-    };
-
     nix.settings = {
       builders-use-substitutes = lib.mkIf config.host.nix.caches.enable true;
 
@@ -47,7 +39,7 @@
       auto-optimise-store = true;
     };
 
-    nix.gc = lib.mkIf (config.host.nix.garbageCollection.enable && !config.host.nix.nh.enable) {
+    nix.gc = lib.mkIf config.host.nix.garbageCollection.enable {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";

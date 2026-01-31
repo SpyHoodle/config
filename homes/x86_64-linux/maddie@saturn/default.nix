@@ -190,6 +190,12 @@
         };
       };
 
+      # NH
+      nh = {
+        enable = true;
+        garbageCollection.enable = true;
+      };
+
       # Chromium Web Apps
       chromium = {
         chatgpt.enable = true;
