@@ -36,9 +36,6 @@
       };
 
       initContent = ''
-        # Run fastfetch if enabled
-        ${lib.optionalString config.host.programs.fastfetch.enable "fastfetch"}
-
         # Disable Ctrl-S to freeze terminal
         stty stop undef
 

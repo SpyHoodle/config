@@ -124,9 +124,6 @@
 
     # Programs
     programs = {
-      # Fastfetch
-      fastfetch.enable = true;
-
       # Hyfetch
       hyfetch.enable = true;
 

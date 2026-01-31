@@ -127,9 +127,6 @@
 
     # Programs
     programs = {
-      # Fastfetch
-      fastfetch.enable = true;
-
       # Gemini
       gemini.enable = true;
 
