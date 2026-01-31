@@ -7,10 +7,7 @@
 
 {
   options = {
-    host.programs.hyfetch.enable = lib.mkEnableOption {
-      description = "Enable hyfetch, a pride fetch program";
-      default = true;
-    };
+    host.programs.hyfetch.enable = lib.mkEnableOption "Enable hyfetch, a pride fetch program";
     host.programs.hyfetch.flag = lib.mkOption {
       type = lib.types.enum [
         "transgender"

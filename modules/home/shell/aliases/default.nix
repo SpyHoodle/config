@@ -2,10 +2,7 @@
 
 {
   options = {
-    host.shell.aliases.enable = lib.mkEnableOption {
-      description = "Enable generic shell aliases";
-      default = true;
-    };
+    host.shell.aliases.enable = lib.mkEnableOption "Enable generic shell aliases";
   };
 
   config = lib.mkIf config.host.shell.aliases.enable {

@@ -7,10 +7,7 @@
 
 {
   options = {
-    host.code.rust.enable = lib.mkEnableOption {
-      description = "Enable Rust programming language support";
-      default = true;
-    };
+    host.code.rust.enable = lib.mkEnableOption "Enable Rust programming language support";
   };
 
   config = lib.mkIf config.host.code.rust.enable {

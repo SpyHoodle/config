@@ -8,14 +8,8 @@
 
 {
   options = {
-    host.editor.neovim.enable = lib.mkEnableOption {
-      description = "Enable Neovim, a highly configurable text editor";
-      default = true;
-    };
-    host.editor.neovim.defaultEditor = lib.mkEnableOption {
-      default = true;
-      description = "Set Neovim as the default editor";
-    };
+    host.editor.neovim.enable = lib.mkEnableOption "Enable Neovim, a highly configurable text editor";
+    host.editor.neovim.defaultEditor = lib.mkEnableOption "Set Neovim as the default editor";
   };
 
   config = lib.mkIf config.host.editor.neovim.enable {

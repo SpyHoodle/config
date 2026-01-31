@@ -2,10 +2,7 @@
 
 {
   options = {
-    host.shell.zsh.enable = lib.mkEnableOption {
-      description = "Enable zsh as the default shell";
-      default = true;
-    };
+    host.shell.zsh.enable = lib.mkEnableOption "Enable zsh as the default shell";
   };
 
   config = lib.mkIf config.host.shell.zsh.enable {

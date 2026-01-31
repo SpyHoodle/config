@@ -2,14 +2,8 @@
 
 {
   options = {
-    host.browser.chromium.enable = lib.mkEnableOption {
-      description = "Enable Chromium browser with extensions";
-      default = true;
-    };
-    host.browser.chromium.defaultBrowser = lib.mkEnableOption {
-      description = "Set Chromium as the default browser";
-      default = false;
-    };
+    host.browser.chromium.enable = lib.mkEnableOption "Enable Chromium browser with extensions";
+    host.browser.chromium.defaultBrowser = lib.mkEnableOption "Set Chromium as the default browser";
   };
 
   config = lib.mkIf config.host.browser.chromium.enable {

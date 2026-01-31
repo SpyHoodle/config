@@ -8,10 +8,7 @@
 
 {
   options = {
-    host.desktop.anyrun.enable = lib.mkEnableOption {
-      description = "Enable anyrun as the system runner";
-      default = true;
-    };
+    host.desktop.anyrun.enable = lib.mkEnableOption "Enable anyrun as the system runner";
   };
 
   config = lib.mkIf config.host.desktop.anyrun.enable {

@@ -2,10 +2,7 @@
 
 {
   options = {
-    host.programs.eza.enable = lib.mkEnableOption {
-      description = "Enable Eza, a modern ls replacement";
-      default = true;
-    };
+    host.programs.eza.enable = lib.mkEnableOption "Enable Eza, a modern ls replacement";
   };
 
   config = lib.mkIf config.host.programs.eza.enable {

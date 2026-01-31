@@ -2,10 +2,7 @@
 
 {
   options = {
-    host.shell.starship.enable = lib.mkEnableOption {
-      description = "Enable Starship, a minimal, blazing-fast, and infinitely customizable prompt for any shell";
-      default = true;
-    };
+    host.shell.starship.enable = lib.mkEnableOption "Enable Starship, a minimal, blazing-fast, and infinitely customizable prompt for any shell";
     host.shell.starship.icon = lib.mkOption {
       type = lib.types.str;
       default = "λ";

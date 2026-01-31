@@ -47,10 +47,7 @@
           size = 14;
         };
       };
-      nerdFontGlyphs.enable = lib.mkEnableOption {
-        default = true;
-        description = "Enable Nerd Font Glyphs";
-      };
+      nerdFontGlyglyphs.enable = lib.mkEnableOption "Enable Nerd Font Glyphs";
       extraFonts = lib.mkOption {
         type = lib.types.listOf inputs.home-manager.lib.hm.types.fontType;
         description = "Extra fonts to install";

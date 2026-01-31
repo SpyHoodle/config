@@ -2,10 +2,7 @@
 
 {
   options = {
-    host.xdgCleanup.enable = lib.mkEnableOption {
-      description = "Prefer xdg directories where possible";
-      default = true;
-    };
+    host.xdgCleanup.enable = lib.mkEnableOption "Prefer xdg directories where possible";
   };
 
   config = lib.mkIf config.host.xdgCleanup.enable {

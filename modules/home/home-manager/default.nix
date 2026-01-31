@@ -2,7 +2,8 @@
 
 {
   options = {
-    host.home-manager.enable = lib.mkEnableOption {
+    host.home-manager.enable = lib.mkOption {
+      type = lib.types.bool;
       description = "Enable home-manager configuration";
       default = true;
     };

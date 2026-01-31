@@ -2,14 +2,8 @@
 
 {
   options = {
-    host.terminal.alacritty.enable = lib.mkEnableOption {
-      description = "Enable Alacritty terminal emulator";
-      default = true;
-    };
-    host.terminal.alacritty.defaultTerminal = lib.mkEnableOption {
-      description = "Set Alacritty as the default terminal emulator";
-      default = true;
-    };
+    host.terminal.alacritty.enable = lib.mkEnableOption "Enable Alacritty terminal emulator";
+    host.terminal.alacritty.defaultTerminal = lib.mkEnableOption "Set Alacritty as the default terminal emulator";
   };
 
   config = lib.mkIf config.host.terminal.alacritty.enable {
