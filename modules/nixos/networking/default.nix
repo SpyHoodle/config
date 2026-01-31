@@ -48,11 +48,6 @@
     networking.useDHCP = config.host.networking.useDHCP;
     networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
-    networking.hosts = {
-      "127.0.0.1" = [ "localhost" config.host.networking.hostName ];
-      "::1" = [ "localhost" config.host.networking.hostName ];
-    };
-
     networking.wireless = lib.mkIf config.host.networking.wireless.enable {
       enable = true;
       userControlled = true;
