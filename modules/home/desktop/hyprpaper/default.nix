@@ -13,27 +13,23 @@
     };
   };
 
-  config.xdg.configFile = lib.mkIf config.host.desktop.hyprland.enable {
-    "hypr/hyprpaper.conf".text =
-      let
-        wallpaper = "${config.host.theme.wallpaper}";
-        monitors = config.host.desktop.hyprland.monitors;
-        wallpaperLines = builtins.concatStringsSep "\n" (
-          builtins.map (m:
-            let
-              monitorName = builtins.head (lib.splitString "," m);
-            in
-            "wallpaper = ${monitorName},${wallpaper}"
-          ) monitors
-        );
-      in
-      ''
-        preload = ${wallpaper}
-        ${wallpaperLines}
-        splash = false
-        ipc = on
-      '';
-
-    home.packages = [ pkgs.hyprpaper ];
+  config = lib.mkIf config.host.desktop.hyprland.enable {
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = [ "${config.host.theme.wallpaper}" ];
+        wallpaper =
+          if config.host.desktop.hyprland.monitors != [ ] then
+            builtins.map (m:
+              let
+                monitorName = builtins.head (lib.splitString "," m);
+              in
+              "${monitorName},${config.host.theme.wallpaper}"
+            ) config.host.desktop.hyprland.monitors
+          else
+            [ ",${config.host.theme.wallpaper}" ];
+      };
+    };
   };
 }
