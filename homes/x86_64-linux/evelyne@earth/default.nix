@@ -68,6 +68,7 @@
         icon = " ";
       };
       aliases.enable = true;
+      direnv.enable = true;
     };
 
     # Neovim
@@ -123,6 +124,9 @@
 
     # Programs
     programs = {
+      # Fastfetch
+      fastfetch.enable = true;
+
       # Hyfetch
       hyfetch.enable = true;
 

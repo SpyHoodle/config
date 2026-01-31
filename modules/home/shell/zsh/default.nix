@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options = {
@@ -13,6 +13,20 @@
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       autocd = true;
+
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.8.0";
+            hash = "sha256-Z6EYQdasvpl1P78poj9efnnLj7QQg13Me8x1Ryyw+dM=";
+          };
+        }
+      ];
+
       dotDir = "${config.xdg.configHome}/zsh";
       history = {
         size = 9999999;
@@ -22,6 +36,9 @@
       };
 
       initContent = ''
+        # Run fastfetch if enabled
+        ${lib.optionalString config.host.programs.fastfetch.enable "fastfetch"}
+
         # Disable Ctrl-S to freeze terminal
         stty stop undef
 

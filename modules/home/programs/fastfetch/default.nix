@@ -1,0 +1,51 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+  options = {
+    host.programs.fastfetch.enable = lib.mkEnableOption "Enable fastfetch, a modern fetch program";
+  };
+
+  config = lib.mkIf config.host.programs.fastfetch.enable {
+    home.packages = [ pkgs.fastfetch ];
+
+    xdg.configFile."fastfetch/config.jsonc".text = builtins.toJSON {
+      "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+      "modules" = [
+        "title"
+        "separator"
+        "os"
+        "host"
+        "kernel"
+        "uptime"
+        "packages"
+        "shell"
+        "display"
+        "de"
+        "wm"
+        "wmtheme"
+        "theme"
+        "icons"
+        "font"
+        "cursor"
+        "terminal"
+        "terminalfont"
+        "cpu"
+        "gpu"
+        "memory"
+        "swap"
+        "disk"
+        "localip"
+        "battery"
+        "poweradapter"
+        "locale"
+        "break"
+        "colors"
+      ];
+    };
+  };
+}

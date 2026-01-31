@@ -71,6 +71,7 @@
       zsh.enable = true;
       starship.enable = true;
       aliases.enable = true;
+      direnv.enable = true;
     };
 
     # Neovim
@@ -126,6 +127,9 @@
 
     # Programs
     programs = {
+      # Fastfetch
+      fastfetch.enable = true;
+
       # Gemini
       gemini.enable = true;
 
