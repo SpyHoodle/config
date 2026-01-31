@@ -21,7 +21,9 @@ let
       "${pkgs.firefox}/bin/firefox";
   lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
   kill = "${pkgs.hyprland}/bin/hyprctl kill";
-  screenshot = "${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+  screenshot = "${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only";
+  screenshot_window = "${pkgs.hyprshot}/bin/hyprshot -m window --clipboard-only";
+  screenshot_output = "${pkgs.hyprshot}/bin/hyprshot -m output --clipboard-only";
   color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
   clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
   audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
@@ -43,7 +45,8 @@ in
         # Screenshot
         "${mod} SHIFT, S, exec, ${screenshot}"
         "${mod}, S, exec, ${screenshot}"
-        ", Print, exec, ${screenshot}"
+        ", Print, exec, ${screenshot_output}"
+        "${mod} ALT, S, exec, ${screenshot_window}"
 
         # Terminal
         "${mod}, RETURN, exec, ${terminal}"
