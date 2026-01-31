@@ -13,7 +13,6 @@
   config = lib.mkIf config.host.desktop.waybar.enable {
     programs.waybar = {
       enable = true;
-      systemd.enable = true;
 
       settings = {
         mainBar = {
