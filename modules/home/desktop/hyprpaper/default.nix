@@ -18,16 +18,13 @@
       enable = true;
       settings = {
         splash = false;
-        wallpaper = [
-          {
-            monitor = "DP-1";
-            path = "${config.host.theme.wallpaper}";
-          }
-          {
-            monitor = "DP-2";
-            path = "${config.host.theme.wallpaper}";
-          }
-        ];
+        preload = [ "${config.host.theme.wallpaper}" ];
+        wallpaper = builtins.map (m:
+          let
+            monitorName = builtins.head (lib.splitString "," m);
+          in
+          "${monitorName},${config.host.theme.wallpaper}"
+        ) config.host.desktop.hyprland.monitors;
       };
     };
   };
