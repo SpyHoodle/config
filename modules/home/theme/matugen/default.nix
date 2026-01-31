@@ -59,26 +59,29 @@
             }
           '';
 
-          palette = pkgs.runCommand "matugen-palette.nix" {
-            nativeBuildInputs = [ pkgs.matugen ];
-            inherit wallpaper;
-            passAsFile = [ "template" ];
-            template = template;
-          } ''
-            # Create config file
-            cat > matugen.toml <<EOF
-            [config]
-            reload_apps = false
-            set_wallpaper = false
+          palette =
+            pkgs.runCommand "matugen-palette.nix"
+              {
+                nativeBuildInputs = [ pkgs.matugen ];
+                inherit wallpaper;
+                passAsFile = [ "template" ];
+                template = template;
+              }
+              ''
+                # Create config file
+                cat > matugen.toml <<EOF
+                [config]
+                reload_apps = false
+                set_wallpaper = false
 
-            [templates.nix]
-            input_path = "$templatePath"
-            output_path = "$out"
-            EOF
+                [templates.nix]
+                input_path = "$templatePath"
+                output_path = "$out"
+                EOF
 
-            # Run matugen
-            matugen image "$wallpaper" -c matugen.toml -m ${style}
-          '';
+                # Run matugen
+                matugen image "$wallpaper" -c matugen.toml -m ${style}
+              '';
         in
         import "${palette}";
 
@@ -128,45 +131,52 @@
           @define-color shade_color rgba(0, 0, 0, 0.07);
           @define-color scrollbar_outline_color {{colors.outline.default.hex}};
         '';
-        
-        # Derivation to generate GTK CSS files
-        gtkCssFiles = pkgs.runCommand "matugen-gtk-css" {
-            nativeBuildInputs = [ pkgs.matugen ];
-            inherit wallpaper;
-            inherit gtkTemplate;
-          } ''
-            mkdir -p $out/.config/gtk-4.0
-            mkdir -p $out/.config/gtk-3.0
-            
-            # Create matugen config
-            cat > matugen.toml <<EOF
-            [config]
-            reload_apps = false
-            set_wallpaper = false
-            
-            [templates.gtk4]
-            input_path = "$gtkTemplate"
-            output_path = "$out/.config/gtk-4.0/gtk.css"
 
-            [templates.gtk3]
-            input_path = "$gtkTemplate"
-            output_path = "$out/.config/gtk-3.0/gtk.css"
-            EOF
-            
-            # Run matugen
-            matugen image "$wallpaper" -c matugen.toml -m ${style}
-          '';
-      in
-      {
-        enable = true;
-        cursorTheme = lib.mkForce {
-          package = config.host.theme.cursor.package;
-          name = config.host.theme.cursor.name;
-          size = config.host.theme.cursor.size;
-        };
-        
-        gtk4.extraCss = lib.mkForce "@import url(\"${gtkCssFiles}/.config/gtk-4.0/gtk.css\");";
-        gtk3.extraCss = lib.mkForce "@import url(\"${gtkCssFiles}/.config/gtk-3.0/gtk.css\");";
-      };
-  };
+        # Derivation to generate GTK CSS files
+        gtkCssFiles =
+          pkgs.runCommand "matugen-gtk-css"
+            {
+              nativeBuildInputs = [ pkgs.matugen ];
+              inherit wallpaper;
+              inherit gtkTemplate;
+            }
+            ''
+              mkdir -p $out/.config/gtk-4.0
+              mkdir -p $out/.config/gtk-3.0
+
+              # Create matugen config
+              cat > matugen.toml <<EOF
+              [config]
+              reload_apps = false
+              set_wallpaper = false
+
+              [templates.gtk4]
+              input_path = "$gtkTemplate"
+              output_path = "$out/.config/gtk-4.0/gtk.css"
+
+              [templates.gtk3]
+              input_path = "$gtkTemplate"
+              output_path = "$out/.config/gtk-3.0/gtk.css"
+              EOF
+
+              # Run matugen
+              matugen image "$wallpaper" -c matugen.toml -m ${style}
+            '';
+            in
+            {
+              enable = true;
+              cursorTheme = lib.mkForce {
+                package = config.host.theme.cursor.package;
+                name = config.host.theme.cursor.name;
+                size = config.host.theme.cursor.size;
+              };
+      
+              theme = lib.mkForce {
+                name = "adw-gtk3${if style == "dark" then "-dark" else ""}";
+                package = pkgs.adw-gtk3;
+              };
+              
+              gtk4.extraCss = lib.mkForce "@import url(\"${gtkCssFiles}/.config/gtk-4.0/gtk.css\");";
+              gtk3.extraCss = lib.mkForce "@import url(\"${gtkCssFiles}/.config/gtk-3.0/gtk.css\");";
+            };  };
 }
