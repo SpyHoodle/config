@@ -14,7 +14,7 @@ in
   config = lib.mkIf config.host.desktop.hyprland.enable {
     programs.zsh.profileExtra = lib.mkBefore ''
       if [ -z $WAYLAND_DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${pkgs.dbus}/bin/dbus-run-session ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
+        exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
       fi
     '';
 
@@ -23,16 +23,18 @@ in
       package = inputs.hyprland.packages.${system}.hyprland;
 
       xwayland.enable = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+      };
 
       settings = {
         exec-once = [
-          "systemctl --user restart xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal pipewire wireplumber hyprpolkitagent mako kdeconnect"
-          "sleep 5"
-          "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
-          "${pkgs.hyprpaper}/bin/hyprpaper"
+          "${pkgs.waybar}/bin/waybar"
           "${pkgs.clipse}/bin/clipse -listen"
-        ] ++ config.host.desktop.hyprland.startupApps;
+          "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
+        ]
+        ++ config.host.desktop.hyprland.startupApps;
 
         input = {
           kb_layout = config.host.input.keyboard.layout;
@@ -136,7 +138,7 @@ in
         };
 
         cursor = {
-          no_hardware_cursors = true;
+          no_hardware_cursors = false;
         };
 
         monitor = config.host.desktop.hyprland.monitors ++ [ ",preferred,auto,1" ];
@@ -161,8 +163,10 @@ in
         "3".up.command = "${hyprctl} dispatch fullscreen 0";
         "3".down.command = "${hyprctl} dispatch fullscreen 0";
         "4".down.command = lock;
-        "3".left.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1+1}')";
-        "3".right.command = "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1-1}')";
+        "3".left.command =
+          "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1+1}')";
+        "3".right.command =
+          "${hyprctl} dispatch workspace $(${hyprctl} activeworkspace -j | ${jq} .id | ${awk} '{print $1-1}')";
       }
     );
 
