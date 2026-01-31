@@ -63,7 +63,7 @@
       onedark.enable = false;
       matugen.enable = true;
       colors.accent = "base0D";
-      wallpaper = ./wallpapers/nasa.png;
+      wallpaper = ./wallpapers/kita.png;
     };
 
     # Shell

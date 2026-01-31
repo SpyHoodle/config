@@ -135,8 +135,15 @@
             inherit wallpaper;
             inherit gtkTemplate;
           } ''
-            mkdir -p $out/share/themes/Matugen-${style}/gtk-4.0
-            mkdir -p $out/share/themes/Matugen-${style}/gtk-3.0
+            mkdir -p $out/share/themes/Matugen-${style}
+            
+            # Determine source theme name
+            SRC_THEME="adw-gtk3${if style == "dark" then "-dark" else ""}"
+            SRC_PATH="${pkgs.adw-gtk3}/share/themes/$SRC_THEME"
+            
+            # Copy all files from adw-gtk3
+            cp -r $SRC_PATH/* $out/share/themes/Matugen-${style}/
+            chmod -R u+w $out/share/themes/Matugen-${style}
             
             # Create matugen config
             cat > matugen.toml <<EOF
@@ -144,33 +151,46 @@
             reload_apps = false
             set_wallpaper = false
             
-            [templates.gtk4]
+            [templates.colors]
             input_path = "$gtkTemplate"
-            output_path = "$out/share/themes/Matugen-${style}/gtk-4.0/gtk.css"
-
-            [templates.gtk3]
-            input_path = "$gtkTemplate"
-            output_path = "$out/share/themes/Matugen-${style}/gtk-3.0/gtk.css"
+            output_path = "colors.css"
             EOF
             
             # Run matugen
             matugen image "$wallpaper" -c matugen.toml -m ${style}
             
-            # Create index.theme for GTK3 support
-            cat > $out/share/themes/Matugen-${style}/index.theme <<EOF
-            [Desktop Entry]
-            Type=X-GNOME-Metatheme
-            Name=Matugen-${style}
-            Comment=Matugen generated theme
-            Encoding=UTF-8
+            # Append generated colors to gtk.css files to override defaults
+            # We append so that if GTK CSS cascades, these values win. 
+            # If adw-gtk3 uses @define-color, later definitions should override earlier ones.
             
-            [X-GNOME-Metatheme]
-            GtkTheme=Matugen-${style}
-            MetacityTheme=adw-gtk3
-            IconTheme=Adwaita
-            CursorTheme=Adwaita
-            ButtonLayout=close,minimize,maximize:menu
-            EOF
+            for version in gtk-3.0 gtk-4.0; do
+              if [ -f "$out/share/themes/Matugen-${style}/$version/gtk.css" ]; then
+                cat colors.css >> "$out/share/themes/Matugen-${style}/$version/gtk.css"
+              fi
+            done
+            
+            # Update index.theme
+            if [ -f "$out/share/themes/Matugen-${style}/index.theme" ]; then
+              substituteInPlace "$out/share/themes/Matugen-${style}/index.theme" \
+                --replace "$SRC_THEME" "Matugen-${style}" \
+                --replace "Adw-gtk3" "Matugen-${style}"
+            else
+               # Fallback if index.theme is missing (unlikely)
+                cat > $out/share/themes/Matugen-${style}/index.theme <<EOF
+                [Desktop Entry]
+                Type=X-GNOME-Metatheme
+                Name=Matugen-${style}
+                Comment=Matugen generated theme based on adw-gtk3
+                Encoding=UTF-8
+                
+                [X-GNOME-Metatheme]
+                GtkTheme=Matugen-${style}
+                MetacityTheme=adw-gtk3
+                IconTheme=Adwaita
+                CursorTheme=Adwaita
+                ButtonLayout=close,minimize,maximize:menu
+                EOF
+            fi
           '';
       in
       {
