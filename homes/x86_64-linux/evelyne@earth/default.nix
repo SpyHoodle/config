@@ -82,7 +82,10 @@
       enable = true;
       userName = "Eveleyne Cassidy";
       userEmail = "retroevelyne@outlook.com";
-      gpg.key = "C4F179337DB0D43A2ABE8EC900FC03E8D01EA976";
+      gpg = {
+        enable = true;
+        key = "C4F179337DB0D43A2ABE8EC900FC03E8D01EA976";
+      };
     };
 
     # XDG

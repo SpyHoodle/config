@@ -85,7 +85,10 @@
       enable = true;
       userName = "Madeleine Holbrook";
       userEmail = "maddie@spyhoodle.me";
-      gpg.key = "FA50688B9EB6D8AA070C8241C296DE8C9053683F";
+      gpg = {
+        enable = true;
+        key = "FA50688B9EB6D8AA070C8241C296DE8C9053683F";
+      };
     };
 
     # XDG
