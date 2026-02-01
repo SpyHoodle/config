@@ -196,6 +196,7 @@
       # Chromium Web Apps
       chromium = {
         chatgpt.enable = true;
+        gemini.enable = true;
         icloud.enable = true;
         icloud-drive.enable = true;
         icloud-notes.enable = true;
