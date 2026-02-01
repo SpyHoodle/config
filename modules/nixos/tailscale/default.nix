@@ -2,7 +2,7 @@
 
 {
   options.host.networking.tailscale = {
-    enable = lib.mkEnableOption "Enable tailscale for this system";
+    enable = lib.mkEnableOption "Enable Tailscale for this system";
     runExitNode = lib.mkOption {
       description = "Enable this system as an exit node on the tailnet";
       default = false;
@@ -11,10 +11,12 @@
     server = lib.mkOption {
       description = "Set where your control plane server is";
       default = "controlplane.tailscale.com";
+      type = lib.types.str;
     };
     authKeyFile = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to key file for tailscale";
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Path to key file for tailscale authentication";
     };
   };
 
@@ -22,6 +24,7 @@
     services.tailscale = {
       enable = true;
       useRoutingFeatures = if config.host.networking.tailscale.runExitNode then "both" else "client";
+      authKeyFile = lib.mkIf (config.host.networking.tailscale.authKeyFile != null) config.host.networking.tailscale.authKeyFile;
       extraUpFlags = [
         "--login-server=https://${config.host.networking.tailscale.server}"
         "--accept-routes"
