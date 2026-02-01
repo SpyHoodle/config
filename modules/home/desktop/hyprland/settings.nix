@@ -12,6 +12,58 @@ let
 in
 {
   config = lib.mkIf config.host.desktop.hyprland.enable {
+    systemd.user.services = lib.mkMerge [
+      {
+        waybar = {
+          Unit = {
+            Description = "Waybar";
+            PartOf = [ "graphical-session.target" ];
+            After = [ "graphical-session.target" ];
+          };
+          Service = {
+            ExecStart = "${pkgs.waybar}/bin/waybar";
+            Restart = "on-failure";
+          };
+          Install = {
+            WantedBy = [ "graphical-session.target" ];
+          };
+        };
+
+        clipse = {
+          Unit = {
+            Description = "Clipse clipboard manager";
+            PartOf = [ "graphical-session.target" ];
+            After = [ "graphical-session.target" ];
+          };
+          Service = {
+            ExecStart = "${pkgs.clipse}/bin/clipse -listen";
+            Restart = "on-failure";
+          };
+          Install = {
+            WantedBy = [ "graphical-session.target" ];
+          };
+        };
+      }
+
+      (lib.listToAttrs (lib.imap0 (idx: app: {
+        name = "hyprland-startup-${builtins.toString idx}";
+        value = {
+          Unit = {
+            Description = "Hyprland startup app: ${app}";
+            PartOf = [ "graphical-session.target" ];
+            After = [ "graphical-session.target" ];
+          };
+          Service = {
+            ExecStart = "${pkgs.bash}/bin/bash -lc ${lib.escapeShellArg app}";
+            Restart = "on-failure";
+          };
+          Install = {
+            WantedBy = [ "graphical-session.target" ];
+          };
+        };
+      }) config.host.desktop.hyprland.startupApps))
+    ];
+
     programs.zsh.profileExtra = lib.mkBefore ''
       if [ -z $WAYLAND_DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
         exec ${pkgs.systemd}/bin/systemd-cat -t hyprland ${config.wayland.windowManager.hyprland.package}/bin/Hyprland
@@ -30,11 +82,8 @@ in
 
       settings = {
         exec-once = [
-          "${pkgs.waybar}/bin/waybar"
-          "${pkgs.clipse}/bin/clipse -listen"
           "${config.wayland.windowManager.hyprland.package}/bin/hyprctl setcursor ${config.host.theme.cursor.name} ${builtins.toString config.host.theme.cursor.size}"
-        ]
-        ++ config.host.desktop.hyprland.startupApps;
+        ];
 
         input = {
           kb_layout = config.host.input.keyboard.layout;

@@ -72,7 +72,7 @@
           };
           "network#ethernet" = {
             "interface" = "wlp15s0";
-            "format" = "{ifname}: Connecting";
+            "format" = " ";
             "format-ethernet" = " ";
             "format-wifi" = " ";
             "format-disconnected" = " {ifname}";

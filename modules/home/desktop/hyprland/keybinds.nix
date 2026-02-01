@@ -29,6 +29,7 @@ let
   audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
   chatgpt = "${pkgs.chromium}/bin/chromium --app=https://chatgpt.com";
   powermenu = "${pkgs.wlogout}/bin/wlogout";
+  logout = "${pkgs.systemd}/bin/systemctl --user exit && ${pkgs.systemd}/bin/loginctl terminate-user ${toString config.host.home-manager.username}";
 in
 {
   config = lib.mkIf config.host.desktop.hyprland.enable {
@@ -38,6 +39,7 @@ in
         "${mod}, F, togglefloating"
         "${mod} SHIFT, R, forcerendererreload"
         "${mod} SHIFT, E, exit"
+        "${mod}, E, exec, ${logout}"
         "${mod}, M, fullscreen, 0"
         "${mod}, P, pin"
         "${mod} SHIFT, M, fullscreen, 1"
