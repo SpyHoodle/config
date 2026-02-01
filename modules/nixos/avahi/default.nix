@@ -2,7 +2,7 @@
 
 {
   options = {
-    host.networking.avahi.enable = lib.mkEnableOption "Enable Avahi discovery and reccommended settings";
+    host.networking.avahi.enable = lib.mkEnableOption "Enable Avahi discovery and recommended settings";
   };
 
   config = lib.mkIf config.host.networking.avahi.enable {

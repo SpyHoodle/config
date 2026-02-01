@@ -7,9 +7,11 @@
 
 {
   options = {
-    host.git.enable = lib.mkEnableOption "Enable git and reccommended settings";
+    host.git.enable = lib.mkEnableOption "Enable git and recommended settings";
+    host.git.gpg.enable = lib.mkEnableOption "Enable GPG signing for git commits";
     host.git.gpg.key = lib.mkOption {
       type = lib.types.str;
+      default = "";
       description = "The GPG key to use for signing git commits";
     };
     host.git.userName = lib.mkOption {
@@ -56,7 +58,7 @@
         "*.swp"
       ];
 
-      signing = {
+      signing = lib.mkIf config.host.git.gpg.enable {
         key = config.host.git.gpg.key;
         signByDefault = true;
         signer = "${pkgs.gnupg}/bin/gpg";

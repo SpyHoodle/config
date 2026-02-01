@@ -7,7 +7,7 @@
 
 {
   options = {
-    host.graphics.enable = lib.mkEnableOption "Enable reccommended graphics settings";
+    host.graphics.enable = lib.mkEnableOption "Enable recommended graphics settings";
   };
 
   config = lib.mkIf config.host.graphics.enable {

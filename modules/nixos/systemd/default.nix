@@ -6,7 +6,7 @@
 
 {
   options = {
-    host.systemd.nixOOMKiller.enable = lib.mkEnableOption "Enable agressive nix-daemon out of memory killing";
+    host.systemd.nixOOMKiller.enable = lib.mkEnableOption "Enable aggressive nix-daemon out of memory killing";
   };
 
   config = lib.mkIf config.host.systemd.nixOOMKiller.enable {
