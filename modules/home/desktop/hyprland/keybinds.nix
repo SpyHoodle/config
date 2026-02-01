@@ -19,6 +19,11 @@ let
       "${pkgs.chromium}/bin/chromium"
     else
       "${pkgs.firefox}/bin/firefox";
+  filemanager =
+    if config.host.programs.nautilus.enable then
+      "${pkgs.nautilus}/bin/nautilus"
+    else
+      "";
   lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
   kill = "${pkgs.hyprland}/bin/hyprctl kill";
   powermenu = "${pkgs.wlogout}/bin/wlogout";
@@ -60,7 +65,9 @@ in
         "${mod}, N, exec, ${neovim}"
         "ALT, SPACE, exec, ${gemini}"
         ", Insert, exec, ${lock}"
-
+      ]
+      ++ lib.optional (filemanager != "") "${mod}, A, exec, ${filemanager}"
+      ++ [
         # Screenshots
         "${mod} SHIFT, S, exec, ${screenshot}"
         "${mod}, S, exec, ${screenshot}"
