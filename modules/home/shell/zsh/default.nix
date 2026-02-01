@@ -27,7 +27,7 @@
         }
       ];
 
-      dotDir = "${config.xdg.configHome}/zsh";
+      dotDir = ".config/zsh";
       history = {
         size = 9999999;
         expireDuplicatesFirst = true;
