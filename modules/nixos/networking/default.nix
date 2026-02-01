@@ -13,10 +13,7 @@
       description = "Whether to use DHCP to configure the network";
       default = true;
     };
-    host.networking.wireless.enable = lib.mkEnableOption {
-      description = "Whether to enable wireless networking";
-      default = false;
-    };
+    host.networking.wireless.enable = lib.mkEnableOption "Enable wireless networking";
     host.networking.wireless.networks = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {

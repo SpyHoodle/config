@@ -7,10 +7,7 @@
 
 {
   options = {
-    host.code.python.enable = lib.mkEnableOption {
-      description = "Enable Python programming language support";
-      default = false;
-    };
+    host.code.python.enable = lib.mkEnableOption "Enable Python programming language support";
     host.code.python.package = lib.mkOption {
       type = lib.types.package;
       default = pkgs.python312;

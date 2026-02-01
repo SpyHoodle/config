@@ -7,10 +7,7 @@
 
 {
   options.host.theme.catppuccin = {
-    enable = lib.mkEnableOption {
-      description = "Whether to use Catppuccin themes";
-      default = true;
-    };
+    enable = lib.mkEnableOption "Use Catppuccin themes";
     style = lib.mkOption {
       type = lib.types.enum [
         "Latte"

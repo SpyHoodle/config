@@ -7,10 +7,7 @@
 
 {
   options = {
-    host.programs.remmina.enable = lib.mkEnableOption {
-      description = "Enable Remmina, a remote desktop";
-      default = false;
-    };
+    host.programs.remmina.enable = lib.mkEnableOption "Enable Remmina, a remote desktop client";
   };
 
   config = lib.mkIf config.host.programs.remmina.enable {

@@ -7,10 +7,7 @@
 
 {
   options = {
-    host.programs.discord.enable = lib.mkEnableOption {
-      description = "Enable Discord, a chat application";
-      default = false;
-    };
+    host.programs.discord.enable = lib.mkEnableOption "Enable Discord, a chat application";
   };
 
   config = lib.mkIf config.host.programs.discord.enable {

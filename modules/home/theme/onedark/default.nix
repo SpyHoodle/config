@@ -7,10 +7,7 @@
 
 {
   options.host.theme.onedark = {
-    enable = lib.mkEnableOption {
-      description = "Whether to use the OneDark theme";
-      default = false;
-    };
+    enable = lib.mkEnableOption "Use the OneDark theme";
 
     style = lib.mkOption {
       type = lib.types.enum [
