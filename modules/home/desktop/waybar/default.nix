@@ -71,9 +71,9 @@ in
           temperature = {
             thermal-zone = 2;
             critical-threshold = 80;
-            format = " {temperatureC}°C";
-            format-critical = " {temperatureC}°C";
-            tooltip-format = " CPU Temperature\n\n{temperatureC}°C / {temperatureF}°F";
+            format = "  {temperatureC}°C";
+            format-critical = "  {temperatureC}°C";
+            tooltip-format = "  CPU Temperature\n\n{temperatureC}°C / {temperatureF}°F";
             hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
           };
 
@@ -142,8 +142,8 @@ IP: {ipaddr}/{cidr}
           # Clock
           clock = {
             interval = 1;
-            format = " {:%H:%M}";
-            format-alt = " {:%a %d %b %Y, %H:%M:%S}";
+            format = "  {:%H:%M}";
+            format-alt = "  {:%a %d %b %Y, %H:%M:%S}";
             tooltip-format = ''<tt><small>{calendar}</small></tt>
 
 <b>Timezone:</b> {tz_list}'';
@@ -208,8 +208,8 @@ Source: {format_source}'';
           # CPU usage
           cpu = {
             interval = 2;
-            format = " {usage}%";
-            tooltip-format = '' CPU Usage
+            format = "  {usage}%";
+            tooltip-format = ''  CPU Usage
 
 Total: {usage}%
 Per Core: {avg_frequency} GHz avg'';
@@ -236,8 +236,8 @@ Per Core: {avg_frequency} GHz avg'';
 
           /* Base styles */
           * {
-            font-family: "${font.mono.name}", "Symbols Nerd Font Mono", monospace;
-            font-size: 14px;
+            font-family: "${font.mono.name}", monospace;
+            font-size: 15px;
             min-height: 0;
           }
         ''
