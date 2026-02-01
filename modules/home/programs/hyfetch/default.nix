@@ -12,8 +12,16 @@
       type = lib.types.enum [
         "transgender"
         "genderfluid"
+        "nonbinary"
+        "lesbian"
+        "gay"
+        "bisexual"
+        "pansexual"
+        "asexual"
+        "aromantic"
+        "rainbow"
       ];
-      description = "The flag to use for hyfetch";
+      description = "The pride flag to use for hyfetch";
       default = "transgender";
     };
   };
@@ -23,20 +31,21 @@
     programs.hyfetch = {
       enable = true;
       settings = {
-        "preset" = "${config.host.programs.hyfetch.flag}";
-        "mode" = "rgb";
-        "light_dark" = "dark";
-        "lightness" = 0.65;
-        "color_align" = {
-          "mode" = "horizontal";
-          "custom_colors" = [ ];
-          "fore_back" = null;
+        preset = config.host.programs.hyfetch.flag;
+        mode = "rgb";
+        # Use theme style for light/dark mode
+        light_dark = lib.strings.toLower config.host.theme.style;
+        lightness = if config.host.theme.style == "Dark" then 0.65 else 0.5;
+        color_align = {
+          mode = "horizontal";
+          custom_colors = [ ];
+          fore_back = null;
         };
-        "backend" = "fastfetch";
-        "args" = null;
-        "distro" = null;
-        "pride_month_shown" = [ ];
-        "pride_month_disable" = true;
+        backend = "fastfetch";
+        args = null;
+        distro = null;
+        pride_month_shown = [ ];
+        pride_month_disable = false;
       };
     };
   };
