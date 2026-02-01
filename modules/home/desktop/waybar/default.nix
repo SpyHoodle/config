@@ -236,8 +236,8 @@ Per Core: {avg_frequency} GHz avg'';
 
           /* Base styles */
           * {
-            font-family: "${font.mono.name}", "Symbols Nerd Font", sans-serif;
-            font-size: ${toString font.mono.size}px;
+            font-family: "${font.mono.name}", "Symbols Nerd Font Mono", monospace;
+            font-size: 14px;
             min-height: 0;
           }
         ''
