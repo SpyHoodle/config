@@ -2,10 +2,10 @@
 
 {
   options = {
-    host.programs.coolercontrol.enable = lib.mkEnableOption "Enable coolercontrol, a service for managing system cooling";
+    host.services.coolercontrol.enable = lib.mkEnableOption "Enable CoolerControl, a service for managing system cooling";
   };
 
-  config = lib.mkIf config.host.programs.coolercontrol.enable {
+  config = lib.mkIf config.host.services.coolercontrol.enable {
     programs.coolercontrol.enable = true;
     boot.kernelParams = [
       "amdgpu.ppfeaturemask=0xffffffff"

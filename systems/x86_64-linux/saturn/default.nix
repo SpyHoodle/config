@@ -38,6 +38,7 @@
       useDHCP = true;
       wireless = {
         enable = true;
+        # TODO: Consider using sops-nix or agenix for secrets management
         networks = {
           "EE-756TPS" = {
             psk = "VJHxLRJYE4wDPRtW";
@@ -115,11 +116,11 @@
       ollama.enable = true;
       steam.enable = true;
       gamemode.enable = true;
-      coolercontrol.enable = true;
     };
 
     # Services
     services = {
+      coolercontrol.enable = true;
       opentabletdriver.enable = true;
       openrgb.enable = true;
       gnupg.enable = true;
