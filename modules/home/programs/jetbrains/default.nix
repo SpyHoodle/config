@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.host.programs.jetbrains.enable {
     home.packages = with pkgs.jetbrains; [
-      pycharm-professional
+      pycharm
       rust-rover
       clion
       webstorm
