@@ -10,36 +10,18 @@
     host.editor.zed.defaultEditor = lib.mkEnableOption "Set Zed as the default editor";
   };
 
-  config =
-    let
-      defaultEditors = [
-        config.host.editor.zed.defaultEditor
-        config.host.editor.vscode.defaultEditor
-        config.host.editor.neovim.defaultEditor
+  config = lib.mkIf config.host.editor.zed.enable {
+    programs.zed-editor = {
+      enable = true;
+      extensions = [
+        "html"
+        "nix"
+        "latex"
+        "java"
+        "catppuccin"
+        "fleet-themes"
+        "discord_presence"
       ];
-      defaultEditorCount = builtins.length (lib.filter (value: value) defaultEditors);
-    in
-    lib.mkMerge [
-      {
-        assertions = [
-          {
-            assertion = defaultEditorCount <= 1;
-            message = "Only one default editor can be enabled (Zed, VSCode, or Neovim).";
-          }
-        ];
-      }
-      (lib.mkIf config.host.editor.zed.enable {
-        programs.zed-editor = {
-          enable = true;
-          extensions = [
-            "html"
-            "nix"
-            "latex"
-            "java"
-            "catppuccin"
-            "fleet-themes"
-            "discord_presence"
-          ];
 
           userSettings = {
             vim_mode = true;
@@ -188,6 +170,5 @@
             "text/x-typescript" = lib.mkDefault [ "dev.zed.Zed.desktop" ];
           };
         };
-      })
-    ];
+      };
 }
