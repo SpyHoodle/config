@@ -23,50 +23,43 @@
       ];
 
       userSettings = {
-        # Appearance
-        buffer_font_family = "Iosevka Nerd Font Mono";
-        buffer_font_size = 16;
-        ui_font_family = "Iosevka Nerd Font Mono";
+        vim_mode = true;
+        base_keymap = "VSCode";
         ui_font_size = 17;
-        agent_font_family = "Iosevka Nerd Font Mono";
-        agent_font_size = 17;
-        tabs = {
-          file_icons = true;
-          git_status = true;
-          show_diagnostics = "errors";
-        };
-        title_bar = {
-          show_branch_icon = true;
-          show_onboarding_banner = false;
-        };
-        status_bar = {
-          show_git_branch = true;
-          show_file_path = true;
-        };
-        minimap = {
-          show = "always";
-        };
-
-        # Theme
+        buffer_font_size = 16;
         theme = {
-          mode = "system";
+          mode = "dark";
           light = "Fleet Light";
           dark = "Fleet Dark";
         };
-
-        # Editor
-        base_keymap = "VSCode";
-        vim_mode = true;
-        relative_line_numbers = true;
-        preferred_line_length = 160;
-        show_wrap_guides = true;
-        tab_size = 2;
-        indent_guides = {
+        agent = {
+          default_model = {
+            model = "claude-sonnet-4";
+            provider = "copilot_chat";
+          };
           enabled = true;
-          coloring = "fixed";
         };
-        inlay_hints = {
-          enabled = true;
+        agent_font_family = "Iosevka Nerd Font Mono";
+        agent_ui_font_size = 17;
+        auto_install_extensions = {
+          catppuccin = true;
+          discord_presence = true;
+          fleet-themes = true;
+          html = true;
+          java = true;
+          latex = true;
+          nix = true;
+        };
+        autosave = {
+          after_delay = {
+            milliseconds = 1000;
+          };
+        };
+        buffer_font_family = "Iosevka Nerd Font Mono";
+        confirm_quit = true;
+        ensure_final_newline_on_save = true;
+        features = {
+          edit_prediction_provider = "copilot";
         };
         file_scan_exclusions = [
           "**/.git"
@@ -86,73 +79,58 @@
           "**/__pycache__"
           "**/venv"
         ];
-
-        # Languages
+        format_on_save = "on";
+        git = {
+          git_gutter = "tracked_files";
+        };
+        indent_guides = {
+          coloring = "fixed";
+          enabled = true;
+        };
+        inlay_hints = {
+          enabled = true;
+        };
         languages = {
           Python = {
             tab_size = 4;
           };
         };
-
-        # Terminal
-        terminal = {
-          font_family = "Iosevka Nerd Font";
-          font_size = 17;
-          cursor_shape = "bar";
-          copy_on_select = true;
-          env = {
-            EDITOR = "zed --wait";
-          };
+        minimap = {
+          show = "always";
         };
-
-        # AI Agent
-        agent = {
-          enabled = true;
-          version = "2";
-          default_model = {
-            provider = "copilot_chat";
-            model = "claude-sonnet-4";
-          };
-        };
-        features = {
-          edit_prediction_provider = "copilot";
-        };
-
-        # Git
-        git = {
-          git_gutter = "tracked_files";
-        };
-
-        # Saving
-        autosave = {
-          after_delay = {
-            milliseconds = 1000;
-          };
-        };
-        ensure_final_newline_on_save = true;
+        preferred_line_length = 160;
+        relative_line_numbers = "enabled";
         remove_trailing_whitespace_on_save = true;
-        format_on_save = "on";
-
-        # Application
-        confirm_quit = true;
         restore_on_startup = "last_session";
-
-        # Extensions
-        auto_install_extensions = {
-          html = true;
-          nix = true;
-          latex = true;
-          java = true;
-          catppuccin = true;
-          fleet-themes = true;
-          discord_presence = true;
+        show_wrap_guides = true;
+        status_bar = {
+          show_file_path = true;
+          show_git_branch = true;
         };
-
-        # Telemetry
+        tab_size = 2;
+        tabs = {
+          file_icons = true;
+          git_status = true;
+          show_diagnostics = "errors";
+        };
         telemetry = {
           diagnostics = false;
           metrics = false;
         };
+        terminal = {
+          copy_on_select = true;
+          cursor_shape = "bar";
+          env = {
+            EDITOR = "zed --wait";
+          };
+          font_family = "Iosevka Nerd Font";
+          font_size = 17;
+        };
+        title_bar = {
+          show_branch_icon = true;
+          show_onboarding_banner = false;
+        };
+        ui_font_family = "Iosevka Nerd Font Mono";
       };
     };
   };
