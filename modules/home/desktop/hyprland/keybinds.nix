@@ -21,52 +21,53 @@ let
       "${pkgs.firefox}/bin/firefox";
   lock = "${pkgs.hyprlock}/bin/hyprlock --immediate";
   kill = "${pkgs.hyprland}/bin/hyprctl kill";
+  powermenu = "${pkgs.wlogout}/bin/wlogout";
+  logout = "${pkgs.systemd}/bin/systemctl --user exit && ${pkgs.systemd}/bin/loginctl terminate-user ${toString config.host.home-manager.username}";
+  gemini = "${pkgs.chromium}/bin/chromium --app=https://gemini.google.com";
+  neovim = "${terminal} -e nvim";
   screenshot = "${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only";
   screenshot_window = "${pkgs.hyprshot}/bin/hyprshot -m window --clipboard-only";
-  screenshot_output = "${pkgs.hyprshot}/bin/hyprshot -m output --clipboard-only";
+  screenshot_screen = "${pkgs.hyprshot}/bin/hyprshot -m output --clipboard-only";
   color_picker = "${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.wl-clipboard}/bin/wl-copy";
   clipboard_history = "${terminal} --class clipse --title \"Clipboard History\" -e ${pkgs.clipse}/bin/clipse";
   audio_mixer = "${terminal} --class mixer --title \"Audio Mixer\" -e ${pkgs.pulsemixer}/bin/pulsemixer";
-  chatgpt = "${pkgs.chromium}/bin/chromium --app=https://chatgpt.com";
-  powermenu = "${pkgs.wlogout}/bin/wlogout";
-  logout = "${pkgs.systemd}/bin/systemctl --user exit && ${pkgs.systemd}/bin/loginctl terminate-user ${toString config.host.home-manager.username}";
 in
 {
   config = lib.mkIf config.host.desktop.hyprland.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
+        # Window management
         "${mod}, Q, killactive"
         "${mod}, F, togglefloating"
+        "${mod}, M, fullscreen, 0"
+        "${mod} SHIFT, M, fullscreen, 1"
+        "${mod}, P, pin"
         "${mod} SHIFT, R, forcerendererreload"
         "${mod} SHIFT, E, exit"
         "${mod}, E, exec, ${logout}"
-        "${mod}, M, fullscreen, 0"
-        "${mod}, P, pin"
-        "${mod} SHIFT, M, fullscreen, 1"
 
-        # Screenshot
-        "${mod} SHIFT, S, exec, ${screenshot}"
-        "${mod}, S, exec, ${screenshot}"
-        ", Print, exec, ${screenshot_output}"
-        "${mod} ALT, S, exec, ${screenshot_window}"
-
-        # Terminal
+        # Launchers
         "${mod}, RETURN, exec, ${terminal}"
-
-        # Launcher
-        "ALT, SPACE, exec, ${chatgpt}"
         "${mod}, SPACE, exec, ${launcher}"
         "${mod}, D, exec, ${launcher}"
 
-        # Programs
-        "${mod}, B, exec, ${browser}"
+        # Programs & utilities
         "${mod}, Z, exec, ${powermenu}"
         "${mod}, X, exec, ${kill}"
         "${mod}, C, exec, ${color_picker}"
         "${mod}, V, exec, ${audio_mixer}"
+        "${mod}, B, exec, ${browser}"
+        "${mod}, N, exec, ${neovim}"
+        "ALT, SPACE, exec, ${gemini}"
         ", Insert, exec, ${lock}"
 
-        # Function Keys
+        # Screenshots
+        "${mod} SHIFT, S, exec, ${screenshot}"
+        "${mod}, S, exec, ${screenshot}"
+        "${mod} ALT, S, exec, ${screenshot_window}"
+        ", Print, exec, ${screenshot_screen}"
+
+        # Function keys
         ", F2, exec, ${clipboard_history}"
         ", F8, exec, ${audio_mixer}"
         ", F11, fullscreen, 0"
@@ -114,7 +115,7 @@ in
         ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d ${toString config.host.desktop.hyprland.keybinds.volumeStep}"
         ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
 
-        # Media Controls
+        # Media controls
         ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
         ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
         ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
