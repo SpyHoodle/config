@@ -18,10 +18,15 @@
       default = "NixOS User";
       description = "The full name of the main user";
     };
-    host.user.password = lib.mkOption {
-      type = lib.types.str;
-      default = "nixos";
-      description = "The password of the main user";
+    host.user.hashedPassword = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "The hashed password of the main user. Generate with `mkpasswd -m SHA-512`";
+    };
+    host.user.initialPassword = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "Initial password for the user (will prompt to change on first login)";
     };
     host.user.extraGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -47,7 +52,8 @@
         createHome = true;
         description = config.host.user.fullName;
         extraGroups = config.host.user.extraGroups;
-        password = config.host.user.password;
+        hashedPassword = config.host.user.hashedPassword;
+        initialPassword = lib.mkIf (config.host.user.hashedPassword == null) config.host.user.initialPassword;
         openssh.authorizedKeys.keys = config.host.user.sshKeys;
         shell = config.host.user.shell;
       };
