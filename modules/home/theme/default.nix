@@ -88,6 +88,7 @@
         "Light"
         "Dark"
       ];
+      default = "Dark";
       description = "Whether this theme prefers to match with light or dark color schemes";
     };
 
@@ -98,14 +99,14 @@
             options = {
               hex = lib.mkOption { type = lib.types.str; };
               rgb = {
-                r = lib.mkOption { type = lib.types.numbers 0 255; };
-                g = lib.mkOption { type = lib.types.numbers 0 255; };
-                b = lib.mkOption { type = lib.types.numbers 0 255; };
+                r = lib.mkOption { type = lib.types.ints.between 0 255; };
+                g = lib.mkOption { type = lib.types.ints.between 0 255; };
+                b = lib.mkOption { type = lib.types.ints.between 0 255; };
               };
               hsl = {
-                h = lib.mkOption { type = lib.types.numbers 0 360; };
-                s = lib.mkOption { type = lib.types.numbers 0 100; };
-                l = lib.mkOption { type = lib.types.numbers 0 100; };
+                h = lib.mkOption { type = lib.types.ints.between 0 360; };
+                s = lib.mkOption { type = lib.types.ints.between 0 100; };
+                l = lib.mkOption { type = lib.types.ints.between 0 100; };
               };
             };
           };
