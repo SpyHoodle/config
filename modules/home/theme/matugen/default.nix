@@ -118,6 +118,10 @@
           @define-color window_fg_color {{colors.on_surface.default.hex}};
           @define-color view_bg_color {{colors.surface.default.hex}};
           @define-color view_fg_color {{colors.on_surface.default.hex}};
+          @define-color sidebar_bg_color {{colors.surface_container.default.hex}};
+          @define-color sidebar_fg_color {{colors.on_surface.default.hex}};
+          @define-color sidebar_backdrop_color {{colors.surface_container_low.default.hex}};
+          @define-color sidebar_border_color {{colors.outline.default.hex}};
           @define-color headerbar_bg_color {{colors.surface.default.hex}};
           @define-color headerbar_fg_color {{colors.on_surface.default.hex}};
           @define-color headerbar_border_color {{colors.outline.default.hex}};
@@ -174,6 +178,11 @@
               theme = lib.mkForce {
                 name = "adw-gtk3${if style == "dark" then "-dark" else ""}";
                 package = pkgs.adw-gtk3;
+              };
+
+              iconTheme = lib.mkForce {
+                package = pkgs.papirus-icon-theme;
+                name = if style == "dark" then "Papirus-Dark" else "Papirus-Light";
               };
               
               gtk4.extraCss = lib.mkForce "@import url(\"${gtkCssFiles}/.config/gtk-4.0/gtk.css\");";
