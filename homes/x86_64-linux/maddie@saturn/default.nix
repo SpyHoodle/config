@@ -136,6 +136,12 @@
       # VSCode
       vscode.enable = true;
 
+      # JetBrains
+      jetbrains.enable = true;
+
+      # Zed
+      zed.enable = true;
+
       # Discord
       discord.enable = true;
 
