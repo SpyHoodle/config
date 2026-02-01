@@ -184,27 +184,30 @@
     dconf.settings."org/gnome/desktop/interface".color-scheme =
       "prefer-${lib.strings.toLower config.host.theme.style}";
 
-    gtk = {
-      enable = true;
-      # font = {
-      #   package = config.host.theme.font.sansSerif.package;
-      #   name = config.host.theme.font.sansSerif.name;
-      #   size = config.host.theme.font.sansSerif.size;
-      # };
-      iconTheme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita-dark";
+    gtk =
+      let
+        isDark = config.host.theme.style == "Dark";
+      in
+      {
+        enable = true;
+        iconTheme = {
+          package = pkgs.gnome-themes-extra;
+          name = if isDark then "Adwaita-dark" else "Adwaita";
+        };
+        theme = {
+          package = pkgs.gnome-themes-extra;
+          name = if isDark then "Adwaita-dark" else "Adwaita";
+        };
       };
-      theme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita-dark";
-      };
-    };
 
-    qt = {
-      enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
-    };
+    qt =
+      let
+        isDark = config.host.theme.style == "Dark";
+      in
+      {
+        enable = true;
+        platformTheme.name = "adwaita";
+        style.name = if isDark then "adwaita-dark" else "adwaita";
+      };
   };
 }
