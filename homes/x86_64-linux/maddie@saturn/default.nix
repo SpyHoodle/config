@@ -151,6 +151,9 @@
       # Obsidian
       obsidian.enable = true;
 
+      # Nautilus
+      nautilus.enable = true;
+
       # Remmina
       remmina.enable = true;
 

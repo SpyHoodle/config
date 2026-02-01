@@ -145,6 +145,9 @@
       # Obsidian
       obsidian.enable = true;
 
+      # Nautilus
+      nautilus.enable = true;
+
       # Eza
       eza.enable = true;
 
