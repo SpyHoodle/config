@@ -1,16 +1,8 @@
 /* =============================================================================
  * Waybar Stylesheet - Themed with CSS Variables
  * Variables are injected from Nix: @background, @text, @active, @black, etc.
+ * Base styles (* selector) are also defined in Nix for font theming.
  * ============================================================================= */
-
-/* -----------------------------------------------------------------------------
- * Base Styles
- * -------------------------------------------------------------------------- */
-* {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  min-height: 0;
-}
 
 window#waybar {
   background: alpha(@background, 0.85);

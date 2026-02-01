@@ -220,12 +220,7 @@ Per Core: {avg_frequency} GHz avg'';
 
       style =
         ''
-          /* CSS Variables from theme */
-          :root {
-            --font-family: "${font.mono.name}", "Symbols Nerd Font", sans-serif;
-            --font-size: ${toString font.mono.size}px;
-          }
-
+          /* Theme colors from Nix */
           @define-color background #${palette.base00.hex};
           @define-color hover #${palette.base01.hex};
           @define-color black #${palette.base02.hex};
@@ -238,6 +233,13 @@ Per Core: {avg_frequency} GHz avg'';
           @define-color cyan #${palette.base0C.hex};
           @define-color blue #${palette.base0D.hex};
           @define-color magenta #${palette.base0E.hex};
+
+          /* Base styles */
+          * {
+            font-family: "${font.mono.name}", "Symbols Nerd Font", sans-serif;
+            font-size: ${toString font.mono.size}px;
+            min-height: 0;
+          }
         ''
         + builtins.readFile ./style.css;
     };
