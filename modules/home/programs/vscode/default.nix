@@ -1,16 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ lib, ... }:
 
 {
-  options = {
-    host.programs.vscode.enable = lib.mkEnableOption "Enable VSCode, a code editor";
-  };
-
-  config = lib.mkIf config.host.programs.vscode.enable {
-    programs.vscode.enable = true;
-  };
+  imports = [
+    (lib.mkRenamedOptionModule [ "host" "programs" "vscode" "enable" ] [ "host" "editor" "vscode" "enable" ])
+    (lib.mkRenamedOptionModule [ "host" "programs" "vscode" "defaultEditor" ] [ "host" "editor" "vscode" "defaultEditor" ])
+  ];
 }
 

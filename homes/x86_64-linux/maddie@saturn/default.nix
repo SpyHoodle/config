@@ -77,7 +77,7 @@
     # Neovim
     editor.neovim = {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = false;
     };
 
     # Git
@@ -133,15 +133,8 @@
       # Hyfetch
       hyfetch.enable = true;
 
-      # VSCode
-      vscode.enable = true;
-
       # JetBrains
       jetbrains.enable = true;
-
-      # Zed
-      zed.enable = true;
-
       # Discord
       discord.enable = true;
 
@@ -217,6 +210,18 @@
         search-nixos.enable = true;
         search-nixos-options.enable = true;
         ollama.enable = true;
+      };
+    };
+
+    # Editor
+    editor = {
+      # VSCode
+      vscode.enable = true;
+
+      # Zed
+      zed = {
+        enable = true;
+        defaultEditor = true;
       };
     };
   };
