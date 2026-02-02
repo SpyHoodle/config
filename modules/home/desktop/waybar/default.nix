@@ -101,11 +101,13 @@ in
           # WiFi/Ethernet
           "network#wifi" = {
             interface = "wlp*";
-            format = " ";
-            format-ethernet = " ";
-            format-wifi = " ";
+            interval = 5;
+            format = "{icon}";
+            format-ethernet = " ";
+            format-wifi = "{icon}";
             format-disconnected = "󰤭 ";
             format-disabled = "󰤮 ";
+            format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
             tooltip-format-wifi = ''  WiFi Connected
 
 SSID: {essid}
@@ -148,9 +150,7 @@ IP: {ipaddr}/{cidr}
             interval = 1;
             format = "  {:%H:%M:%S}";
             format-alt = "  {:%a %d %b %Y, %H:%M:%S}";
-            tooltip-format = ''<tt><small>{calendar}</small></tt>
-
-<b>Timezone:</b> {tz_list}'';
+            tooltip-format = ''<tt><small>{calendar}</small></tt>'';
             calendar = {
               mode = "year";
               mode-mon-col = 3;
