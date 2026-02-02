@@ -140,7 +140,7 @@ IP: {ipaddr}/{cidr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
             tooltip-format-disconnected = "  Tailscale Disconnected";
             max-length = 50;
-            min-length = 1;
+            min-length = 2;
           };
 
           # Clock
@@ -208,7 +208,11 @@ Source: {format_source}'';
             interval = 5;
             exec = "free -h | awk '/Mem:/{printf $3}'";
             tooltip = true;
-            tooltip-format = "  Memory Usage";
+            tooltip-format = ''  Memory Usage
+
+Used: {used} / {total} ({percentage}%)
+Available: {avail}
+Swap: {swapUsed} / {swapTotal}'';
           };
 
           # CPU usage
@@ -218,7 +222,8 @@ Source: {format_source}'';
             tooltip-format = ''  CPU Usage
 
 Total: {usage}%
-Per Core: {avg_frequency} GHz avg'';
+Average Frequency: {avg_frequency} GHz
+Max Frequency: {max_frequency} GHz'';
             min-length = 5;
           };
         };
