@@ -92,7 +92,7 @@ in
         };
 
         git_branch = {
-          symbol = "";
+          symbol = " ";
           style = "bold ${magentaColor}";
         };
 
