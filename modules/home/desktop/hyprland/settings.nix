@@ -142,9 +142,9 @@ in
             config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex
           }FF)";
           "col.inactive_border" = "rgba(${config.host.theme.colors.pallete.base02.hex}FF)";
-          gaps_in = 6;
-          gaps_out = 12;
-          border_size = 2;
+          gaps_in = config.host.theme.desktop.gaps.inner;
+          gaps_out = config.host.theme.desktop.gaps.outer;
+          border_size = config.host.theme.desktop.borders.size;
           layout = "master";
         };
 
@@ -166,7 +166,7 @@ in
         ];
 
         decoration = {
-          rounding = config.host.desktop.hyprland.window.rounding;
+          rounding = config.host.theme.desktop.borders.rounding;
           shadow = {
             enabled = true;
             range = 8;
@@ -177,8 +177,8 @@ in
           blur = {
             enabled = true;
             new_optimizations = "on";
-            passes = 2;
-            size = config.host.desktop.hyprland.window.blur;
+            passes = config.host.theme.desktop.blur.passes;
+            size = config.host.theme.desktop.blur.size;
           };
         };
 

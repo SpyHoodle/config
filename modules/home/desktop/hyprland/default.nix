@@ -17,18 +17,6 @@
         description = "List of default monitors to set";
         default = [ ];
       };
-      window = {
-        rounding = lib.mkOption {
-          type = lib.types.int;
-          description = "How round the windows should be";
-          default = 13;
-        };
-        blur = lib.mkOption {
-          type = lib.types.int;
-          description = "How blurred the wallpaper under innactive windows should be";
-          default = 8;
-        };
-      };
       startupApps = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         description = "List of commands to run on hyprland start";
