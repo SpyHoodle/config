@@ -10,6 +10,47 @@
 {
   options.host.theme = {
     enable = lib.mkEnableOption "Enable centralised managed theme";
+
+    # Desktop appearance options (for window managers)
+    desktop = {
+      gaps = {
+        inner = lib.mkOption {
+          type = lib.types.int;
+          default = 6;
+          description = "Inner gap between windows in pixels";
+        };
+        outer = lib.mkOption {
+          type = lib.types.int;
+          default = 12;
+          description = "Outer gap between windows and screen edge in pixels";
+        };
+      };
+      borders = {
+        size = lib.mkOption {
+          type = lib.types.int;
+          default = 2;
+          description = "Border size in pixels";
+        };
+        rounding = lib.mkOption {
+          type = lib.types.int;
+          default = 13;
+          description = "Corner rounding radius in pixels";
+        };
+      };
+      blur = {
+        size = lib.mkOption {
+          type = lib.types.int;
+          default = 8;
+          description = "Blur radius for transparent windows";
+        };
+        passes = lib.mkOption {
+          type = lib.types.int;
+          default = 2;
+          description = "Number of blur passes (more = smoother but slower)";
+        };
+      };
+    };
+
     font = {
       mono = lib.mkOption {
         type = inputs.home-manager.lib.hm.types.fontType;
