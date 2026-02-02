@@ -31,6 +31,9 @@
         enable = true;
         monitor = "HDMI-A-1";
       };
+
+      # Hypridle
+      hyprland.hypridle.enable = true;
     };
 
     # Input
