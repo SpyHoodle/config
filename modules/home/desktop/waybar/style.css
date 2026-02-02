@@ -1,13 +1,12 @@
 /* =============================================================================
- * Waybar Stylesheet - Themed with CSS Variables
+ * Waybar Stylesheet - Floating Window Style
  * Variables are injected from Nix: @background, @text, @active, @black, etc.
- * Base styles (* selector) are also defined in Nix for font theming.
+ * Rounding is inherited from Hyprland window.rounding setting.
  * ============================================================================= */
 
 window#waybar {
-  background: alpha(@background, 0.85);
+  background: transparent;
   color: @text;
-  transition: background-color 0.3s ease;
 }
 
 window#waybar.hidden {
@@ -18,51 +17,49 @@ window#waybar.hidden {
  * Buttons (used by workspaces)
  * -------------------------------------------------------------------------- */
 button {
-  box-shadow: inset 0 -3px transparent;
-  border: none;
-  border-radius: 0;
+  box-shadow: none;
 }
 
 button:hover {
   box-shadow: none;
   text-shadow: none;
-  background: alpha(@hover, 0.5);
-  transition: background-color 0.2s ease;
+  background: inherit;
 }
 
 /* -----------------------------------------------------------------------------
- * Workspaces
+ * Workspaces - Unified Container with Overlapping Active Border
  * -------------------------------------------------------------------------- */
 #workspaces {
-  background: @black;
-  margin: 0;
+  background: @background;
   padding: 0;
+  border-style: solid;
+  border-color: @black;
 }
 
 #workspaces button {
-  padding: 0 8px;
   background: transparent;
   color: @text;
-  border-radius: 0;
-  transition: all 0.2s ease;
-}
-
-#workspaces button:hover {
-  background: alpha(@active, 0.3);
+  border-style: solid;
+  border-color: transparent;
+  padding: 2px 10px;
+  min-width: 10px;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #workspaces button.active {
-  background: alpha(@active, 0.2);
-  box-shadow: inset 0 -2px 0 0 @active;
+  border-color: @active;
+  color: @active;
 }
 
 #workspaces button.urgent {
-  background: alpha(@red, 0.3);
-  box-shadow: inset 0 -2px 0 0 @red;
+  background: @red;
+  color: @background;
+  border-color: @red;
+  animation: blink 0.5s linear infinite alternate;
 }
 
 /* -----------------------------------------------------------------------------
- * Common Module Styling
+ * Common Module Styling - Window Style
  * -------------------------------------------------------------------------- */
 #custom-mem,
 #clock,
@@ -81,97 +78,123 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#privacy-item,
 #mpd {
-  margin: 4px 4px 4px 0;
+  margin: 0 3px;
   padding: 2px 10px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  background: @background;
+  color: @text;
+  border-style: solid;
+  border-color: @black;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover effect for interactive modules */
-#clock:hover,
-#cpu:hover,
-#custom-mem:hover,
-#temperature:hover,
-#pulseaudio:hover,
-#network:hover {
-  opacity: 0.85;
-}
+/* No hover effects on modules */
 
-/* -----------------------------------------------------------------------------
- * Clock Module
- * -------------------------------------------------------------------------- */
+/* Clock: accent color */
 #clock {
-  background: @active;
-  color: @background;
-  font-weight: bold;
+  border-color: @active;
+  color: @active;
 }
 
 /* -----------------------------------------------------------------------------
  * System Monitoring Modules
  * -------------------------------------------------------------------------- */
+/* CPU: green=low, shows usage percentage */
 #cpu {
-  background: @green;
-  color: @background;
+  border-color: @green;
+  color: @green;
 }
 
+/* Memory: green for normal usage */
 #memory,
 #custom-mem {
-  background: @orange;
-  color: @background;
+  border-color: @green;
+  color: @green;
 }
 
+/* Disk: green=good, yellow=warning, red=critical */
 #disk {
-  background: @magenta;
-  color: @background;
+  border-color: @green;
+  color: @green;
 }
 
+#disk.warning {
+  border-color: @yellow;
+  color: @yellow;
+}
+
+#disk.critical {
+  border-color: @red;
+  color: @red;
+}
+
+/* Temperature: blue=cool, yellow=warm, red=critical */
 #temperature {
-  background: @cyan;
-  color: @background;
+  border-color: @cyan;
+  color: @cyan;
+}
+
+#temperature.warning {
+  border-color: @yellow;
+  color: @yellow;
 }
 
 #temperature.critical {
   background: @red;
+  color: @background;
+  border-color: @red;
   animation: blink 0.5s linear infinite alternate;
 }
 
 /* -----------------------------------------------------------------------------
  * Audio Modules
  * -------------------------------------------------------------------------- */
+/* Audio: blue for active, red for muted */
 #pulseaudio {
-  background: @yellow;
-  color: @background;
+  border-color: @blue;
+  color: @blue;
 }
 
 #pulseaudio.muted {
-  background: alpha(@red, 0.8);
+  background: @red;
+  color: @background;
+  border-color: @red;
 }
 
 #wireplumber {
-  background: @yellow;
-  color: @background;
+  border-color: @blue;
+  color: @blue;
 }
 
 #wireplumber.muted {
   background: @red;
+  color: @background;
+  border-color: @red;
 }
 
 /* -----------------------------------------------------------------------------
  * Network Modules
  * -------------------------------------------------------------------------- */
+/* Network: green=connected, yellow=limited, red=disconnected */
 #network {
-  background: @blue;
-  color: @background;
+  border-color: @green;
+  color: @green;
+}
+
+#network.linked {
+  border-color: @yellow;
+  color: @yellow;
 }
 
 #network.disconnected {
   background: @red;
+  color: @background;
+  border-color: @red;
 }
 
 #network.disabled {
-  background: alpha(@black, 0.5);
+  background: @black;
+  border-color: @black;
   color: @text;
 }
 
@@ -179,7 +202,8 @@ button:hover {
  * System Tray
  * -------------------------------------------------------------------------- */
 #tray {
-  background: @black;
+  background: @background;
+  border-color: @black;
 }
 
 #tray > .passive {
@@ -191,87 +215,120 @@ button:hover {
   background: @red;
 }
 
+#tray menu {
+  background: @background;
+  border-style: solid;
+  border-color: @active;
+  padding: 6px;
+}
+
+#tray menu menuitem {
+  padding: 6px 12px;
+}
+
 /* -----------------------------------------------------------------------------
  * Privacy Indicators
  * -------------------------------------------------------------------------- */
 #privacy {
   padding: 0;
-  margin: 0;
+  margin: 0 3px;
 }
 
 #privacy-item {
-  color: @background;
+  background: @background;
+  color: @text;
+  border-style: solid;
+  border-color: @active;
+  padding: 2px 8px;
 }
 
 #privacy-item.screenshare {
   background: @magenta;
+  color: @background;
+  border-color: @magenta;
 }
 
 #privacy-item.audio-in {
   background: @orange;
+  color: @background;
+  border-color: @orange;
 }
 
 /* -----------------------------------------------------------------------------
  * Media Players
  * -------------------------------------------------------------------------- */
 #mpd {
-  background: @green;
-  color: @background;
+  border-color: @active;
 }
 
 #mpd.disconnected {
-  background: alpha(@red, 0.6);
+  background: @red;
+  color: @background;
+  border-color: @red;
 }
 
 #mpd.stopped {
-  background: alpha(@black, 0.5);
+  background: @black;
+  border-color: @black;
   color: @text;
 }
 
 #mpd.paused {
-  background: alpha(@green, 0.6);
+  background: @hover;
 }
 
 #custom-media {
-  background: @green;
-  color: @background;
+  border-color: @active;
 }
 
 /* -----------------------------------------------------------------------------
  * Misc Modules
  * -------------------------------------------------------------------------- */
 #idle_inhibitor {
-  background: @black;
-  color: @text;
+  border-color: @black;
 }
 
 #idle_inhibitor.activated {
   background: @active;
   color: @background;
+  border-color: @active;
 }
 
 #language,
 #keyboard-state {
-  background: @cyan;
-  color: @background;
-  padding: 0 8px;
-  margin: 4px 4px 4px 0;
-  border-radius: 8px;
+  border-color: @active;
+  padding: 2px 10px;
+  margin: 0 3px;
 }
 
 #battery {
-  background: @green;
-  color: @background;
+  border-color: @active;
 }
 
 #battery.charging,
 #battery.plugged {
   background: @green;
+  color: @background;
+  border-color: @green;
 }
 
 #battery.critical:not(.charging) {
   background: @red;
+  color: @background;
+  border-color: @red;
   animation: blink 0.5s linear infinite alternate;
+}
+
+/* -----------------------------------------------------------------------------
+ * Window Title (Center)
+ * -------------------------------------------------------------------------- */
+#window {
+  background: @background;
+  color: @text;
+  border-style: solid;
+  border-color: @black;
+  padding: 2px 12px;
+  margin: 0 3px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -279,7 +336,7 @@ button:hover {
  * -------------------------------------------------------------------------- */
 @keyframes blink {
   to {
-    background: alpha(@red, 0.5);
+    background: @hover;
   }
 }
 
@@ -288,11 +345,11 @@ button:hover {
  * -------------------------------------------------------------------------- */
 tooltip {
   background: @background;
-  border: 1px solid @active;
-  border-radius: 8px;
+  border-style: solid;
+  border-color: @active;
 }
 
 tooltip label {
   color: @text;
-  padding: 4px;
+  padding: 8px 12px;
 }
