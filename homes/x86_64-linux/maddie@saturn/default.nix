@@ -59,11 +59,11 @@
     theme = {
       enable = true;
       style = "Dark";
-      catppuccin.enable = false;
+      catppuccin.enable = true;
       onedark.enable = false;
-      matugen.enable = true;
-      colors.accent = "base0D";
-      wallpaper = ./wallpapers/kita.png;
+      matugen.enable = false;
+      colors.accent = "base0E";
+      wallpaper = ./wallpapers/catppuccin.png;
     };
 
     # Shell
