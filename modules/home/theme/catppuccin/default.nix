@@ -891,22 +891,70 @@
         };
       };
 
-      gtk = {
+      gtk =
+        let
+          flavor = lib.strings.toLower config.host.theme.catppuccin.style;
+          isDark = config.host.theme.style == "Dark";
+        in
+        {
+          enable = true;
+
+          cursorTheme = lib.mkForce {
+            package =
+              pkgs.catppuccin-cursors."${flavor}${config.host.theme.style}";
+            name = "catppuccin-${flavor}-${lib.strings.toLower config.host.theme.style}-cursors";
+            size = config.host.theme.cursor.size;
+          };
+
+          theme = lib.mkForce {
+            package = pkgs.catppuccin-gtk.override {
+              accents = [ "blue" ];
+              variant = flavor;
+            };
+            name = "catppuccin-${flavor}-blue-standard";
+          };
+
+          iconTheme = lib.mkForce {
+            package = pkgs.catppuccin-papirus-folders.override {
+              flavor = flavor;
+              accent = "blue";
+            };
+            name = "Papirus-${if isDark then "Dark" else "Light"}";
+          };
+        };
+
+      # QT theming with Catppuccin Kvantum
+      qt = lib.mkForce {
         enable = true;
-        cursorTheme = lib.mkForce {
-          package =
-            pkgs.catppuccin-cursors."${lib.strings.toLower config.host.theme.catppuccin.style}${config.host.theme.style}";
-          name = "catppuccin-${lib.strings.toLower config.host.theme.catppuccin.style}-${lib.strings.toLower config.host.theme.style}-cursors";
-          size = config.host.theme.cursor.size;
+        platformTheme.name = "kvantum";
+        style = {
+          name = "kvantum";
+          package = pkgs.libsForQt5.qtstyleplugin-kvantum;
         };
       };
 
-      # gtk = {
-      #   enable = true;
-      #   theme = {
-      #     package = pkgs.catppuccin-gtk;
-      #     name = "Catppuccin-Frappe-Standard-Blue-Dark";
-      #   };
-      # };
+      home.packages = [
+        pkgs.libsForQt5.qtstyleplugin-kvantum
+        pkgs.kdePackages.qtstyleplugin-kvantum
+        (pkgs.catppuccin-kvantum.override {
+          accent = "blue";
+          variant = lib.strings.toLower config.host.theme.catppuccin.style;
+        })
+      ];
+
+      # Kvantum theme configuration for Catppuccin
+      xdg.configFile."Kvantum/kvantum.kvconfig".text =
+        let
+          flavor = lib.strings.toLower config.host.theme.catppuccin.style;
+          # Capitalize first letter for theme name
+          flavorCapitalized = lib.strings.concatStrings [
+            (lib.strings.toUpper (lib.strings.substring 0 1 flavor))
+            (lib.strings.substring 1 (-1) flavor)
+          ];
+        in
+        ''
+          [General]
+          theme=catppuccin-${flavor}-blue
+        '';
     };
 }
