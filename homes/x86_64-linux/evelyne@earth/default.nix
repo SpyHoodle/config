@@ -54,8 +54,10 @@
     theme = {
       enable = true;
       style = "Dark";
-      catppuccin.enable = false;
-      matugen.enable = true;
+      catppuccin = {
+        enable = true;
+        style = "Mocha";
+      };
       colors.accent = "base0E";
       wallpaper = ./wallpapers/catppuccin.png;
     };
