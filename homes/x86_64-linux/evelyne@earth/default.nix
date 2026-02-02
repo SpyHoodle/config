@@ -12,13 +12,14 @@
           "sleep 2"
           "discordcanary"
         ];
+        hypridle.enable = true;
       };
-
-      # Waybar
-      waybar.enable = true;
 
       # Wlogout
       wlogout.enable = true;
+
+      # Waybar
+      waybar.enable = true;
 
       # Mako
       mako.enable = true;
@@ -31,9 +32,6 @@
         enable = true;
         monitor = "HDMI-A-1";
       };
-
-      # Hypridle
-      hyprland.hypridle.enable = true;
     };
 
     # Input
@@ -61,6 +59,8 @@
         enable = true;
         style = "Mocha";
       };
+      onedark.enable = false;
+      matugen.enable = false;
       colors.accent = "base0E";
       wallpaper = ./wallpapers/catppuccin.png;
     };
@@ -123,7 +123,7 @@
       # Minecraft
       minecraft.enable = true;
 
-      # Osu!
+      # osu!
       osu.enable = true;
 
       # Tetrio
@@ -132,6 +132,9 @@
 
     # Programs
     programs = {
+      # Gemini
+      gemini.enable = true;
+
       # Hyfetch
       hyfetch.enable = true;
 

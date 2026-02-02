@@ -25,6 +25,8 @@
     ./hardware
   ];
 
+  services.logrotate.checkConfig = false;
+
   host = {
     # Audio
     audio.pipewire.enable = true;
@@ -40,7 +42,10 @@
         allowedTCPPorts = [ ];
       };
       avahi.enable = false;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        runExitNode = false;
+      };
     };
 
     # Bluetooth
@@ -60,7 +65,7 @@
       hyprland.enable = true;
 
       # Ly Display Manager
-      ly.enable = true;
+      ly.enable = false;
     };
 
     # Doas
@@ -102,10 +107,12 @@
       shell.zsh.enable = true;
       ollama.enable = true;
       steam.enable = true;
+      gamemode.enable = true;
     };
 
     # Services
     services = {
+      coolercontrol.enable = true;
       opentabletdriver.enable = true;
       openrgb.enable = true;
       gnupg.enable = true;

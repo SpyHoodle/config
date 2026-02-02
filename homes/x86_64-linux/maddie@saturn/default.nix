@@ -59,7 +59,10 @@
     theme = {
       enable = true;
       style = "Dark";
-      catppuccin.enable = true;
+      catppuccin = {
+        enable = true;
+        style = "Mocha";
+      };
       onedark.enable = false;
       matugen.enable = false;
       colors.accent = "base0E";
@@ -138,6 +141,7 @@
 
       # JetBrains
       jetbrains.enable = true;
+
       # Discord
       discord.enable = true;
 
