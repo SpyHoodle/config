@@ -21,8 +21,14 @@ in
             After = [ "graphical-session.target" ];
           };
           Service = {
+            Type = "simple";
+            ExecStartPre = "${pkgs.coreutils}/bin/sleep 0.1";
             ExecStart = "${pkgs.waybar}/bin/waybar";
+            ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
             Restart = "on-failure";
+            RestartSec = 2;
+            StartLimitIntervalSec = 30;
+            StartLimitBurst = 3;
           };
           Install = {
             WantedBy = [ "graphical-session.target" ];
