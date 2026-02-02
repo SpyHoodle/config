@@ -101,13 +101,12 @@ in
           # WiFi/Ethernet
           "network#wifi" = {
             interface = "wlp*";
+            format = " ";
+            format-ethernet = " ";
+            format-wifi = " ";
+            format-disconnected = " ";
+            format-disabled = " ";
             interval = 5;
-            format = "{icon}";
-            format-ethernet = " ";
-            format-wifi = "{icon}";
-            format-disconnected = "󰤭 ";
-            format-disabled = "󰤮 ";
-            format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
             tooltip-format-wifi = ''  WiFi Connected
 
 SSID: {essid}
@@ -123,7 +122,7 @@ Interface: {ifname}
 IP: {ipaddr}/{cidr}
 Gateway: {gwaddr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
-            tooltip-format-disconnected = "󰤭  Network Disconnected";
+            tooltip-format-disconnected = "  Network Disconnected";
             max-length = 50;
             min-length = 1;
             on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
@@ -131,8 +130,7 @@ Gateway: {gwaddr}
 
           # Tailscale VPN
           "network#tailscale" = {
-            interface = "tailscale0";
-            format = " ";
+            interface = "tailscale0";            interval = 5;            format = " ";
             format-ethernet = " ";
             format-disconnected = " ";
             tooltip-format-ethernet = ''  Tailscale Connected
