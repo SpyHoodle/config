@@ -29,7 +29,6 @@
 
     # My NeoVim Configuration
     editor.url = "github:spyhoodle/editor";
-    editor.inputs.nixpkgs.follows = "nixpkgs";
 
     # Apple Fonts
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
