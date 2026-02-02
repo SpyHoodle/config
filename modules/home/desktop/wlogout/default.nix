@@ -68,8 +68,8 @@
           color: #${config.host.theme.colors.pallete.base05.hex};
           font-family: ${config.host.theme.font.sansSerif.name};
           font-size: ${builtins.toString config.host.theme.font.sansSerif.size}px;
-          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
-          border: 2px solid #${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex};
+          border-radius: ${builtins.toString config.host.theme.desktop.borders.rounding}px;
+          border: ${builtins.toString config.host.theme.desktop.borders.size}px solid #${config.host.theme.colors.pallete.${config.host.theme.colors.accent}.hex};
           background-repeat: no-repeat;
           background-position: center;
           background-size: 25%;

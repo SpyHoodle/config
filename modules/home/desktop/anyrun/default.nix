@@ -53,7 +53,7 @@
         box.main {
           padding: 5px;
           margin: 10px;
-          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border-radius: ${builtins.toString config.host.theme.desktop.borders.rounding}px;
           border: 2px solid @accent;
           background-color: @bg-color;
           box-shadow: 0 0 10px black;
@@ -69,7 +69,7 @@
 
         .matches {
           background-color: rgba(0, 0, 0, 0);
-          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border-radius: ${builtins.toString config.host.theme.desktop.borders.rounding}px;
         }
 
         box.plugin:first-child {
@@ -117,11 +117,11 @@
           background: transparent;
           padding: 0;
           border: 2px solid transparent;
-          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border-radius: ${builtins.toString config.host.theme.desktop.borders.rounding}px;
         }
 
         .match:selected {
-          border-radius: ${builtins.toString config.host.desktop.hyprland.window.rounding}px;
+          border-radius: ${builtins.toString config.host.theme.desktop.borders.rounding}px;
           border: 2px solid @accent;
           background: transparent;
           animation: fade 0.3s linear;

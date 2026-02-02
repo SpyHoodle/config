@@ -11,8 +11,8 @@
       settings = {
         icons = true;
         margin = "12,12,12";
-        borderRadius = config.host.desktop.hyprland.window.rounding;
-        borderSize = 2;
+        borderRadius = config.host.theme.desktop.borders.rounding;
+        borderSize = config.host.theme.desktop.borders.size;
         width = 400;
         height = 100;
         font = "${config.host.theme.font.sansSerif.name} ${

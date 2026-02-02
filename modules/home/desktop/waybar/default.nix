@@ -10,6 +10,12 @@ let
   palette = config.host.theme.colors.pallete;
   accent = config.host.theme.colors.accent;
   font = config.host.theme.font;
+  
+  # Theme settings for consistent styling
+  rounding = builtins.toString config.host.theme.desktop.borders.rounding;
+  gaps_out = builtins.toString config.host.theme.desktop.gaps.outer;
+  gaps_in = builtins.toString config.host.theme.desktop.gaps.inner;
+  border_size = builtins.toString config.host.theme.desktop.borders.size;
 in
 {
   options = {
@@ -24,7 +30,7 @@ in
         mainBar = {
           layer = "top";
           position = "top";
-          margin = "0 0 0 0";
+          margin = "${gaps_out} ${gaps_out} 0 ${gaps_out}";
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "hyprland/window" ];
           modules-right = [
@@ -34,6 +40,7 @@ in
             "temperature"
             "cpu"
             "custom/mem"
+            "disk"
             "network#wifi"
             "network#tailscale"
             "clock"
@@ -44,12 +51,6 @@ in
             icon = true;
             icon-size = 18;
             max-length = 50;
-            rewrite = {
-              "(.*) — Mozilla Firefox" = "󰈹 $1";
-              "(.*) - Chromium" = " $1";
-              "(.*) - Visual Studio Code" = "󰨞 $1";
-              "(.*) - Zed" = " $1";
-            };
           };
 
           # System tray
@@ -62,18 +63,20 @@ in
           # Disk usage
           disk = {
             interval = 30;
-            format = "󰋊 {percentage_used}%";
+            format = "  {percentage_used}%";
             path = "/";
-            tooltip-format = "󰋊 Storage\n\nUsed: {used} / {total}\nFree: {free} ({percentage_free}% available)";
-          };
+            tooltip-format = "  Storage\n\nUsed: {used} / {total}\nFree: {free} ({percentage_free}% available)";            states = {
+              good = 0;
+              warning = 70;
+              critical = 90;
+            };          };
 
           # Temperature
           temperature = {
             thermal-zone = 2;
-            critical-threshold = 80;
-            format = "  {temperatureC}°C";
-            format-critical = "  {temperatureC}°C";
-            tooltip-format = "  CPU Temperature\n\n{temperatureC}°C / {temperatureF}°F";
+            critical-threshold = 80;            warning-threshold = 60;            format = "  {temperatureC}°C";
+            format-critical = "  {temperatureC}°C";
+            tooltip-format = "  CPU Temperature\n\n{temperatureC}°C / {temperatureF}°F";
             hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
           };
 
@@ -98,52 +101,53 @@ in
           # WiFi/Ethernet
           "network#wifi" = {
             interface = "wlp*";
-            format = "󰤨";
-            format-ethernet = "󰈀";
-            format-wifi = "󰤨 {signalStrength}%";
-            format-disconnected = "󰤭";
-            format-disabled = "󰤮";
-            tooltip-format-wifi = ''󰤨 WiFi Connected
+            format = " ";
+            format-ethernet = " ";
+            format-wifi = " ";
+            format-disconnected = "󰤭 ";
+            format-disabled = "󰤮 ";
+            tooltip-format-wifi = ''  WiFi Connected
 
 SSID: {essid}
+Interface: {ifname}
 Signal: {signalStrength}% ({signaldBm} dBm)
 Frequency: {frequency} MHz
 IP: {ipaddr}/{cidr}
 Gateway: {gwaddr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
-            tooltip-format-ethernet = ''󰈀 Ethernet Connected
+            tooltip-format-ethernet = ''  Ethernet Connected
 
 Interface: {ifname}
 IP: {ipaddr}/{cidr}
 Gateway: {gwaddr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
-            tooltip-format-disconnected = "󰤭 Network Disconnected";
+            tooltip-format-disconnected = "󰤭  Network Disconnected";
             max-length = 50;
-            min-length = 2;
+            min-length = 1;
             on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
           };
 
           # Tailscale VPN
           "network#tailscale" = {
             interface = "tailscale0";
-            format = "󰖂";
-            format-ethernet = "󰖂";
-            format-disconnected = "󰖃";
-            tooltip-format-ethernet = ''󰖂 Tailscale Connected
+            format = " ";
+            format-ethernet = " ";
+            format-disconnected = " ";
+            tooltip-format-ethernet = ''  Tailscale Connected
 
 Interface: {ifname}
 IP: {ipaddr}/{cidr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
-            tooltip-format-disconnected = "󰖃 Tailscale Disconnected";
+            tooltip-format-disconnected = "  Tailscale Disconnected";
             max-length = 50;
-            min-length = 2;
+            min-length = 1;
           };
 
           # Clock
           clock = {
             interval = 1;
-            format = "  {:%H:%M}";
-            format-alt = "  {:%a %d %b %Y, %H:%M:%S}";
+            format = "  {:%H:%M:%S}";
+            format-alt = "  {:%a %d %b %Y, %H:%M:%S}";
             tooltip-format = ''<tt><small>{calendar}</small></tt>
 
 <b>Timezone:</b> {tz_list}'';
@@ -169,47 +173,51 @@ IP: {ipaddr}/{cidr}
 
           # Audio
           pulseaudio = {
-            scroll-step = 2;
-            reverse-scrolling = true;
-            format = "{icon} {volume}%";
-            format-bluetooth = "󰂯 {volume}%";
-            format-bluetooth-muted = "󰂲";
-            format-muted = "󰝟";
-            format-source = "󰍬 {volume}%";
-            format-source-muted = "󰍭";
-            format-icons = {
-              headphone = "󰋋";
-              hands-free = "󰋎";
-              headset = "󰋎";
-              phone = "󰏲";
-              portable = "󰏲";
-              car = "󰄋";
-              default = [ "󰕿" "󰖀" "󰕾" ];
+            "scroll-step" = 1;
+            "reverse-scrolling" = 1;
+            "format" = "{icon} {volume}% {format_source}";
+            "format-bluetooth" = "{icon}  {volume}% {format_source}";
+            "format-bluetooth-muted" = " {icon}  {format_source}";
+            "format-muted" = "  {format_source}";
+            "format-source" = " {volume}%";
+            "format-source-muted" = " ";
+            "format-icons" = {
+              "headphone" = " ";
+              "hands-free" = "";
+              "headset" = " ";
+              "phone" = " ";
+              "portable" = " ";
+              "car" = " ";
+              "default" = [
+                " "
+                " "
+                " "
+              ];
             };
-            tooltip-format = ''󰕾 Audio
+            tooltip-format = ''󰕾  Audio
 
 Output: {desc}
 Volume: {volume}%
 Source: {format_source}'';
             on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
             on-click-right = "${pkgs.pamixer}/bin/pamixer -t";
-            min-length = 6;
+            min-length = 13;
           };
 
           # Memory usage
           "custom/mem" = {
-            format = "󰍛 {}";
+            format = "  {}";
             interval = 5;
             exec = "free -h | awk '/Mem:/{printf $3}'";
             tooltip = true;
-            tooltip-format = "󰍛 Memory Usage";
+            tooltip-format = "  Memory Usage";
           };
 
           # CPU usage
           cpu = {
             interval = 2;
-            format = "  {usage}%";
-            tooltip-format = ''  CPU Usage
+            format = "  {usage}%";
+            tooltip-format = ''  CPU Usage
 
 Total: {usage}%
 Per Core: {avg_frequency} GHz avg'';
@@ -234,11 +242,26 @@ Per Core: {avg_frequency} GHz avg'';
           @define-color blue #${palette.base0D.hex};
           @define-color magenta #${palette.base0E.hex};
 
-          /* Base styles */
+          /* Base styles - rounding and border from Hyprland */
           * {
             font-family: "${font.mono.name}", monospace;
-            font-size: 15px;
+            font-size: 17px;
+            font-weight: normal;
             min-height: 0;
+            border-radius: ${rounding}px;
+            border-width: ${border_size}px;
+          }
+
+          /* Workspace button margins to overlap with container border */
+          #workspaces button {
+            margin: -${border_size}px;
+            border-width: ${border_size}px;
+          }
+          #workspaces button:first-child {
+            margin-left: -${border_size}px;
+          }
+          #workspaces button:last-child {
+            margin-right: -${border_size}px;
           }
         ''
         + builtins.readFile ./style.css;
