@@ -130,7 +130,9 @@ Gateway: {gwaddr}
 
           # Tailscale VPN
           "network#tailscale" = {
-            interface = "tailscale0";            interval = 5;            format = " ";
+            interface = "tailscale0";
+            interval = 5;
+            format = " ";
             format-ethernet = " ";
             format-disconnected = " ";
             tooltip-format-ethernet = ''  Tailscale Connected
@@ -140,7 +142,7 @@ IP: {ipaddr}/{cidr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
             tooltip-format-disconnected = "  Tailscale Disconnected";
             max-length = 50;
-            min-length = 2;
+            min-length = 1;
           };
 
           # Clock
@@ -208,11 +210,7 @@ Source: {format_source}'';
             interval = 5;
             exec = "free -h | awk '/Mem:/{printf $3}'";
             tooltip = true;
-            tooltip-format = ''  Memory Usage
-
-Used: {used} / {total} ({percentage}%)
-Available: {avail}
-Swap: {swapUsed} / {swapTotal}'';
+            tooltip-format = "  Memory Usage";
           };
 
           # CPU usage
@@ -222,8 +220,7 @@ Swap: {swapUsed} / {swapTotal}'';
             tooltip-format = ''  CPU Usage
 
 Total: {usage}%
-Average Frequency: {avg_frequency} GHz
-Max Frequency: {max_frequency} GHz'';
+Per Core: {avg_frequency} GHz avg'';
             min-length = 5;
           };
         };
