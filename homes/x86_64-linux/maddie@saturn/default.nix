@@ -60,13 +60,13 @@
       enable = true;
       style = "Dark";
       catppuccin = {
-        enable = true;
+        enable = false;
         style = "Mocha";
       };
       onedark.enable = false;
-      matugen.enable = false;
+      matugen.enable = true;
       colors.accent = "base0E";
-      wallpaper = ./wallpapers/catppuccin.png;
+      wallpaper = ./wallpapers/kita.png;
     };
 
     # Shell
