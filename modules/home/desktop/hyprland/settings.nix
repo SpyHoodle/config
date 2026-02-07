@@ -159,6 +159,11 @@ in
           disable_splash_rendering = true;
         };
 
+        layerrule = [
+          "blur,waybar"
+          "ignorezero,waybar"
+        ];
+
         windowrulev2 = [
           "opacity 0.7 0.7,initialTitle:^(wezterm)$"
           "opacity 0.7 0.7,initialTitle:^(Alacritty)$"
