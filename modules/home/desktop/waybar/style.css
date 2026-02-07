@@ -243,14 +243,14 @@ button:hover {
 }
 
 #privacy-item.screenshare {
-  background: @magenta;
-  color: @background;
+  background: @background;
+  color: @magenta;
   border-color: @magenta;
 }
 
 #privacy-item.audio-in {
-  background: @orange;
-  color: @background;
+  background: @background;
+  color: @orange;
   border-color: @orange;
 }
 
@@ -296,6 +296,9 @@ button:hover {
 
 #language,
 #keyboard-state {
+  background: @background;
+  color: @text;
+  border-style: solid;
   border-color: @active;
   padding: 2px 10px;
   margin: 0 3px;
