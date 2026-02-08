@@ -914,6 +914,11 @@
             name = "catppuccin-${flavor}-blue-standard";
           };
 
+          gtk2.extraConfig = ''
+            gtk-theme-name="catppuccin-${flavor}-blue-standard"
+            gtk-icon-theme-name="Papirus-${if isDark then "Dark" else "Light"}"
+          '';
+
           iconTheme = lib.mkForce {
             package = pkgs.catppuccin-papirus-folders.override {
               flavor = flavor;
@@ -923,23 +928,21 @@
           };
         };
 
-      # QT theming with Catppuccin Kvantum
+      # QT theming with GTK
       qt = lib.mkForce {
         enable = true;
-        platformTheme.name = "kvantum";
+        platformTheme.name = "adwaita";
         style = {
-          name = "kvantum";
-          package = pkgs.libsForQt5.qtstyleplugin-kvantum;
+          name = "gtk2";
+          package = pkgs.libsForQt5.qtstyleplugins;
         };
       };
 
       home.packages = [
-        pkgs.libsForQt5.qtstyleplugin-kvantum
-        pkgs.kdePackages.qtstyleplugin-kvantum
-        (pkgs.catppuccin-kvantum.override {
-          accent = "blue";
-          variant = lib.strings.toLower config.host.theme.catppuccin.style;
-        })
+        pkgs.qgnomeplatform
+        pkgs.qgnomeplatform-qt6
+        pkgs.libsForQt5.qtstyleplugins
+        pkgs.qt6Packages.qt6gtk2
       ];
 
       # Kvantum theme configuration for Catppuccin
