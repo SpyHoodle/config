@@ -41,9 +41,9 @@ let
     ];
 
     character = {
-      success_symbol = "-> ${config.host.shell.starship.icon}";
-      error_symbol = "-> ${config.host.shell.starship.icon}";
-      vimcmd_symbol = "-> ${config.host.shell.starship.icon}";
+      success_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
+      error_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
+      vimcmd_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
     };
 
     directory.truncation_symbol = ".../";
