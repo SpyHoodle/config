@@ -40,12 +40,6 @@ let
       "$character"
     ];
 
-    character = {
-      success_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
-      error_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
-      vimcmd_symbol = lib.mkDefault "-> ${config.host.shell.starship.icon}";
-    };
-
     directory.truncation_symbol = ".../";
 
     git_branch.symbol = " ";
@@ -70,6 +64,14 @@ let
     };
 
     localip.disabled = false;
+  };
+
+  plainCharacterSettings = {
+    character = {
+      success_symbol = "-> ${config.host.shell.starship.icon}";
+      error_symbol = "-> ${config.host.shell.starship.icon}";
+      vimcmd_symbol = "-> ${config.host.shell.starship.icon}";
+    };
   };
 
   themedSettings =
@@ -152,6 +154,7 @@ in
 
       settings = lib.mkMerge [
         baseSettings
+        (lib.mkIf (!config.host.theme.enable) plainCharacterSettings)
         (lib.mkIf config.host.theme.enable themedSettings)
       ];
     };
