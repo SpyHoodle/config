@@ -10,16 +10,38 @@ let
   palette = config.host.theme.colors.pallete;
   accent = config.host.theme.colors.accent;
   font = config.host.theme.font;
-  
+
   # Theme settings for consistent styling
   rounding = builtins.toString config.host.theme.desktop.borders.rounding;
   gaps_out = builtins.toString config.host.theme.desktop.gaps.outer;
   gaps_in = builtins.toString config.host.theme.desktop.gaps.inner;
   border_size = builtins.toString config.host.theme.desktop.borders.size;
+  windowModule = "hyprland/window";
+  selectedNetworkModule = "network#${config.host.desktop.waybar.modules.network}";
+  modulesLeft =
+    [ "hyprland/workspaces" ]
+    ++ lib.optionals (config.host.desktop.waybar.modules.window.position == "left") [ windowModule ];
+  modulesCenter = lib.optionals (config.host.desktop.waybar.modules.window.position == "center") [ windowModule ];
 in
 {
   options = {
     host.desktop.waybar.enable = lib.mkEnableOption "Use waybar as your top bar";
+    host.desktop.waybar.modules.network = lib.mkOption {
+      type = lib.types.enum [
+        "wifi"
+        "ethernet"
+      ];
+      default = "wifi";
+      description = "Primary network module shown in Waybar.";
+    };
+    host.desktop.waybar.modules.window.position = lib.mkOption {
+      type = lib.types.enum [
+        "center"
+        "left"
+      ];
+      default = "center";
+      description = "Position for the hyprland window title module.";
+    };
   };
 
   config = lib.mkIf config.host.desktop.waybar.enable {
@@ -31,8 +53,8 @@ in
           layer = "top";
           position = "top";
           margin = "${gaps_out} ${gaps_out} 0 ${gaps_out}";
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "hyprland/window" ];
+          modules-left = modulesLeft;
+          modules-center = modulesCenter;
           modules-right = [
             "tray"
             "privacy"
@@ -41,7 +63,7 @@ in
             "cpu"
             "custom/mem"
             "disk"
-            "network#wifi"
+            selectedNetworkModule
             "network#tailscale"
             "clock"
           ];
@@ -123,6 +145,25 @@ IP: {ipaddr}/{cidr}
 Gateway: {gwaddr}
 ↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
             tooltip-format-disconnected = "  Network Disconnected";
+            max-length = 50;
+            min-length = 1;
+            on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          };
+
+          "network#ethernet" = {
+            interface = "en*";
+            format = " ";
+            format-ethernet = " ";
+            format-disconnected = " ";
+            format-disabled = " ";
+            interval = 5;
+            tooltip-format-ethernet = ''  Ethernet Connected
+
+Interface: {ifname}
+IP: {ipaddr}/{cidr}
+Gateway: {gwaddr}
+↑ {bandwidthUpBytes}  ↓ {bandwidthDownBytes}'';
+            tooltip-format-disconnected = "  Ethernet Disconnected";
             max-length = 50;
             min-length = 1;
             on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";

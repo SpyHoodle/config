@@ -19,7 +19,13 @@
       wlogout.enable = true;
 
       # Waybar
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        modules = {
+          network = "ethernet";
+          window.position = "left";
+        };
+      };
 
       # Mako
       mako.enable = true;
