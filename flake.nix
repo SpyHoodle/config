@@ -13,6 +13,8 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Nix Darwin
+    darwin.url = "github:LnL7/nix-darwin";
 
 
     # Any Run
